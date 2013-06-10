@@ -1,0 +1,40 @@
+<h1>Страницы с информацией</h1>
+
+<div class="btn-group">
+  <a class="btn btn-primary" href="/admin/page/new">Создать страницу</a>
+</div>
+
+<br><br>
+
+<table class="table table-bordered table-hover category-list _item-list">
+  <!--<caption>...</caption>-->
+  <thead>
+    <tr>
+      <th></th>
+      <th>Заголовок</th>
+      <th>Путь</th>
+      <th>Дата создания</th>
+      <th>Видна в магазине</th>
+      <th>Действие</th>
+      <!--<th>Создана</th>-->
+    </tr>
+  </thead>
+  <tbody>
+    {{#pages}}
+    <tr class="list-item" data-id="{{_id}}">
+      <th class="list-checkbox"><input type="checkbox" value=""></th>
+      <th>
+        <a href="/{{url}}/" target="_blank">{{name}}</a>
+      </th>
+      <th>{{url}}</th>
+      <th>{{dateLocal}}</th>
+      <th>{{activeYN}}</th>
+      <th>
+        <a href="/admin/page/{{_id}}/edit" class="btn btn-mini product-edit" data-id="{{_id}}">Изменить</a>
+        <!--<a href="#">Просмотр</a>-->
+      </th>
+      <!--<th>{{createdAt}}</th>-->
+    </tr>
+    {{/pages}}
+  </tbody>
+</table>

@@ -1,0 +1,27 @@
+
+<form id="editForm" class="form-horizontal" method=post action="/admin/news">
+
+  <div class="btn-group">
+    <button type="submit" class="btn btn-primary">Сохранить</button>
+    <a class="btn" href="/admin/news/new">Отменить</a>
+  </div>
+
+  <h1>Создание новости</h1>
+
+  <label class="control-label1">
+    Заголовок:
+  </label>
+  <input type="text" name="name" class="input-xxlarge" placeholder="Введите заголовок новости">
+
+  <br>
+  <br>
+
+  <textarea id="text" name="content" rows="12" cols="50" style="width:530px" placeholder="Введите текст новости"></textarea>
+
+  <label class="checkbox">
+    <input type="hidden" name="active" value="false">
+    <input type="checkbox" name="active" value="true" checked>
+    Показывать новость
+  </label>
+
+</form>

@@ -1,0 +1,50 @@
+{{#product}}
+<div  id="it-{{id}}">
+	<h2>
+		{{name}}{{#disabled}} <span class="label label-important">Не продается!</span>{{/disabled}}
+	</h2>
+	<img id="im-{{id}}" src="{{main_image}}">
+	<div>
+		<h3>
+			Описание
+		</h3>
+
+		<div class="media">
+			<a class="pull-left" href="/about/">
+              <img class="media-object  img-polaroid" data-src="holder.js/64x64" alt="64x64" style="width: auto; height: auto;" src="/img/avatar.jpg">
+          </a>
+			<div class="media-body">
+        {{{formattedDescription}}}
+			</div>
+		</div>
+		<p>
+		</p>
+		<div>
+			<span>Цена: <b>8500</b> руб.<span>
+      <a class="btn btn-primary into-cart" data-id="{{id}}" {{#disabled}}disabled{{/disabled}}>В корзину</a>
+    </span>
+			</span>
+		</div>
+    {{^product_img_empty}}
+		<h3>
+			Дополнительные фотографии:
+		</h3>
+    {{/product_img_empty}}
+    {{#images}}
+		<img src="{{.}}">
+		{{/images}}
+    {{^product_ref_empty}}
+		<h3>
+			Что почитать:
+		</h3>
+    {{/product_ref_empty}}
+		<ul>
+      {{#refs}}
+			<li>
+				<a href="{{url}}" target="_blank">{{name}}</a>
+			</li>
+      {{/refs}}
+		</ul>
+	</div>
+</div>
+{{/product}}

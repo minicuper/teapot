@@ -1,0 +1,72 @@
+<h1>Товары</h1>
+
+<div class="btn-group">
+  <a class="btn btn-primary" href="/admin/product/new">Создать товар</a>
+</div>
+
+<br><br>
+
+<table class="table table-bordered table-hover category-list _item-list">
+  <!--<caption>...</caption>-->
+  <thead>
+    <tr>
+      <th></th>
+      <th>Название</th>
+      <th>Количество</th>
+      <th>Категория</th>
+      <th>Виден в магазине</th>
+      <th>Действие</th>
+      <!--<th>Создана</th>-->
+    </tr>
+  </thead>
+  <tbody>
+    <form id="filter-form" action="/admin/product">
+    <tr class="table-filter">
+      <th></th>
+      <th></th>
+      <th></th>
+      <th class="input-inside1">
+        <div class="input-append div-select">
+          <select class="category-select" form="filter-form" name="category">
+            <option {{#filter.categoryNo}}selected{{/filter.categoryNo}} value=""></option>
+            {{#categories}}
+              <option {{#selected}}selected{{/selected}} value="{{_id}}">{{name}}</option>
+            {{/categories}}
+          </select>
+          <div class="btn-group">
+            <a class="btn clear-select">&times;</a>
+          </div>
+        </div>
+
+      </th>
+      <th></th>
+      <th class="input-inside1"><button type="submit" form="filter-form" class="btn btn-block">Фильтровать</button></th>
+      <!--<th>{{createdAt}}</th>-->
+    </tr>
+    </form>
+    {{#products}}
+    <tr class="list-item" data-id="{{_id}}">
+      <!--<th class="list-checkbox"><input type="checkbox" value=""></th>-->
+      <th style="margin:0; padding:0">
+        <!--<img height="38" width="57" src="{{main_image}}" style="margin:0; padding:0">-->
+        <a href="/catalog/{{_id}}" class="thumbnail" target="_blank">
+          <img height="28" width="42" src="{{main_image}}" style="margin:0; padding:0">
+        </a>
+      </th>
+      <th>
+        <a href="/catalog/{{_id}}" target="_blank">
+        {{name}}
+        </a>
+      </th>
+      <th>{{count}}</th>
+      <th>{{category.name}}</th>
+      <th>{{activeYN}}</th>
+      <th>
+        <a href="/admin/product/{{_id}}/edit" class="btn btn-mini product-edit" data-id="{{_id}}">Изменить</a>
+        <!--<a href="#">Просмотр</a>-->
+      </th>
+      <!--<th>{{createdAt}}</th>-->
+    </tr>
+    {{/products}}
+  </tbody>
+</table>

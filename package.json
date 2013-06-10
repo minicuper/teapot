@@ -1,0 +1,36 @@
+{
+    "name": "teapot"
+  , "description": "A internet-store"
+  , "version": "1.0.0"
+  , "private": true
+  , "author": "Artur Zayats <zag2art@gmail.com> (http://zag2art.github.com)"
+  , "engines": {
+        "node": "0.10.x"
+      , "npm":  "1.2.x"
+    }
+  , "scripts": {
+      "start": "NODE_ENV=development ./node_modules/.bin/nodemon server.js"
+    }
+  , "dependencies": {
+      "express": "latest"
+    , "jade": "latest"
+    , "hogan-express": "latest"
+    , "mongoose": "latest"
+    , "mongoose-text-search": "latest"
+    , "connect-mongo": "latest"
+    , "connect-flash": "latest"
+    , "underscore": "latest"
+    , "gzippo": "latest"
+    , "async": "latest"
+    , "view-helpers": "latest"
+    , "passport": "latest"
+    , "passport-local": "latest"
+    , "nodemailer": "latest"
+    , "forever": "latest"
+    , "hogan.js": "latest"
+    , "moment": "latest"
+  }
+  , "devDependencies": {
+      "nodemon": "latest"
+    }
+}

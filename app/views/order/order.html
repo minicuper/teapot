@@ -1,0 +1,162 @@
+
+<h1>
+	Оформление заказа
+</h1>
+<p>
+	Это ваш заказ. Если все верно, то заполните поля ФИО, e-mail, телефон
+	и адрес доставки. Адрес пишите разборчивыми буквами и не забудьте индекс!
+</p>
+<!--<div class="well">-->
+<!-- <div class="nav-header cart-header">
+		У вас в корзине:
+	</div>
+      -->
+<div class="main-cart full-cart  {{cart.fullcartclass}}">
+  <h2>
+  	Товары в корзине
+  </h2>
+  <table class="table table-condensed cart-order table-bordered" style="font-size:12px"
+  cellpadding="0">
+  	<colgroup>
+  		<col id="c_1">
+  			<col id="c_2">
+  				<col id="c_3">
+  					<col id="c_4">
+  	</colgroup>
+  	<thead>
+  		<tr>
+  			<th id="td_1">
+  				Товар
+  			</th>
+  			<th id="td_2">
+  				<span class="visible-phone">Кол.</span>
+  				<span class="hidden-phone">Количество</span>
+  			</th>
+  			<th id="td_3">
+  				Цена
+  			</th>
+  			<th id="td_4">
+  			</th>
+  		</tr>
+  	</thead>
+  	<tbody class="cart-body">
+        {{#def_cart}}
+        <tr class="ci-{{id}}">
+        <td><a href="/catalog/{{id}}">{{name}}</a></td>
+        <td class="hidden-tablet">  {{count}} {{unit}}</td>
+        <td> {{cost}} {{setting.currencyName}}</td>
+        <td><a class=close href="#">&times;</a></td>
+        </tr>
+        {{/def_cart}}
+      <tr class="cart-delivery"><td>Доставка Почтой РФ</td><td class="hidden-tablet"></td><td> {{setting.deliveryPrice}} {{setting.currencyName}}</td><td></td></tr>
+  	</tbody>
+  </table>
+
+  <div class="cart-total-text" style="text-align: center1;">
+  	Общая сумма
+  	<span class="cart-total-number">{{cart.total}}</span>
+  	{{setting.currencyName}}
+  </div>
+</div>
+<div class="empty-cart {{cart.emptycartclass}}">
+  <h2>Корзина пуста</h2>
+  <p><span class="label label-important">Что-то не то!</span> В вашей корзине отсутствуют товары. Вернитесь в каталог и выберете то, что вам понравится.</p>
+</div>
+<!--</div>-->
+<h2>
+	Кому и куда отправить
+</h2>
+<form id=orderForm method="post" action="/order" name="shopOrderForm" class="form-horizontal">
+
+			<div id=name class="control-group">
+        <label class="control-label" for="name">ФИО получателя: <em>*</em></label>
+			  <div class="controls">
+					<input name="name" type="text" value="{{delivery.name}}" placeholder="Иванов Иван Иванович" required maxlength="100">
+				</div>
+			</div>
+
+      <div id=addsess class="control-group">
+        <label class="control-label" for="address">Адрес: <em>*</em></label>
+				<div class="controls">
+					<textarea rows="3" cols="" name="address" placeholder="Московская область, Москва, ул. Шаболовка, д.37, кв. 45" required  maxlength="200">{{delivery.address}}</textarea>
+				</div>
+			</div>
+
+      <div id=zip class="control-group">
+        <label class="control-label" for="zip">Почтовый индекс: <em>*</em></label>
+				<div class="controls">
+					<input name="zip" type="text" value="{{delivery.zip}}" placeholder="115162" required pattern="[0-9]{6}" title="Почтовый индекс - 6 цифр">
+				</div>
+			</div>
+
+      <div id=baracuda class="control-group">
+        <label class="control-label" for="baracuda"></label>
+	      <div class="controls">
+          <input name="baracuda" type="text" value="">
+				</div>
+			</div>
+
+      <div id=email class="control-group">
+        <label class="control-label" for="email">E-mail: <em>*</em></label>
+				<div class="controls">
+					<input name="email" type="email" value="{{delivery.email}}" placeholder="ivanov@mail.ru" required>
+				</div>
+			</div>
+
+      <div id=message class="control-group">
+        <label class="control-label" for="message">Примечание</label>
+				<div class="controls">
+					<textarea name="message">{{delivery.message}}</textarea>
+				</div>
+			</div>
+
+
+  <h2>
+  	Способ оплаты
+  </h2>
+  <div class="select-pay">
+  	<label  class="radio">
+  		<input type="radio" name="payment" value="sb" checked>
+  		Наличкой на карточку Сбербанка
+  	</label>
+  	<label  class="radio">
+  		<input type="radio" name="payment" value="gate">
+  		Электронной картой через платежный шлюз Interkass
+  	</label>
+  </div>
+  <br>
+  <button type="submit" class="btn btn-success">
+  	Сформировать заказ
+  </button>
+</form>
+<h3>
+	В чем же разница?
+</h3>
+<div class="media">
+  <a class="pull-left" href="#">
+          <img class="media-object  img-polaroid" data-src="holder.js/64x64" alt="64x64" style="width: auto; height: auto;" src="/img/avatar.jpg">
+      </a>
+	<div class="media-body">
+		<!-- <h4 class="media-heading">
+	Медиа-заголовок
+</h4>
+          -->
+<p>
+  Если у вас есть банковская карточка, то, конечно же, лучше оплатить ей.
+	Нажав на кнопку «оплатить банковской карточкой», вы попадете на страницу
+	платежной системы «Assist». Это крупнейшая в России система приема электронных
+	платежей - надежная и безопасная. Тут вы введете необходимые данные своей
+	карточки и произведете оплату. Я увижу ваш платеж почти моментально в режиме
+	он-лайн. У нас в этом плане все очень хорошо организованно. И мы начнем
+	заниматься вашим заказом уже на следующий рабочий день.
+</p>
+<p>
+	Если у вас нет карточки, то смело нажимайте «наличкой через банк». Это
+	тоже безотказный метод. Система автоматически и моментально сгенерирует
+	счет на оплату, и вышлет его на ваш электронный ящик. Красиво? А-то! Вам
+	нужно будет сходить в любое отделение любого банка и произвести оплату
+	по этому счету. Это просто.
+</p>
+	</div>
+</div>
+

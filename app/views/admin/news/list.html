@@ -1,0 +1,35 @@
+<h1>Новости</h1>
+
+<div class="btn-group">
+  <a class="btn btn-primary" href="/admin/news/new">Создать новость</a>
+</div>
+
+<br><br>
+
+<table class="table table-bordered table-hover category-list _item-list">
+  <!--<caption>...</caption>-->
+  <thead>
+    <tr>
+      <th></th>
+      <th>Заголовок</th>
+      <th>Дата создания</th>
+      <th>Видна в магазине</th>
+      <th>Действие</th>
+      <!--<th>Создана</th>-->
+    </tr>
+  </thead>
+  <tbody>
+    {{#news}}
+    <tr class="list-item" data-id="{{_id}}">
+      <th class="list-checkbox"><input type="checkbox" value=""></th>
+      <th>{{name}}</th>
+      <th>{{dateLocal}}</th>
+      <th>{{activeYN}}</th>
+      <th>
+        <a href="/admin/news/{{_id}}/edit" class="btn btn-mini product-edit" data-id="{{_id}}">Изменить</a>
+      </th>
+      <!--<th>{{createdAt}}</th>-->
+    </tr>
+    {{/news}}
+  </tbody>
+</table>

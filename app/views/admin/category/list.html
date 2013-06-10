@@ -1,0 +1,35 @@
+<h1>Список категорий</h1>
+
+<div class="btn-group">
+  <a class="btn btn-primary" href="/admin/category/new">Создать новую категорию</a>
+</div>
+
+<br><br>
+
+<table class="table table-bordered table-hover category-list _item-list">
+  <!--<caption>...</caption>-->
+  <thead>
+    <tr>
+      <th></th>
+      <th>Имя</th>
+      <th>Путь</th>
+      <th>Видна в магазине</th>
+      <th>Действие</th>
+      <!--<th>Создана</th>-->
+    </tr>
+  </thead>
+  <tbody>
+    {{#categories}}
+    <tr class="list-item" data-id="{{_id}}">
+      <th class="list-checkbox"><input type="checkbox" value=""></th>
+      <th><a href="/catalog/{{url}}/" target="_blank">{{name}}</a></th>
+      <th>{{url}}</th>
+      <th>{{activeYN}}</th>
+      <th>
+        <a href="/admin/category/{{_id}}/edit" class="btn btn-mini product-edit" data-id="{{_id}}">Изменить</a>
+      </th>
+      <!--<th>{{createdAt}}</th>-->
+    </tr>
+    {{/categories}}
+  </tbody>
+</table>

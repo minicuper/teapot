@@ -1,0 +1,59 @@
+
+<form id="editForm" class="form-horizontal" method=post action="/admin/category/{{category._id}}">
+  <div class="btn-group">
+    <button type="submit" class="btn btn-primary">Сохранить</button>
+    <a class="btn" href="/admin/category/{{category._id}}/edit">Отменить</a>
+  </div>
+
+  <h1>Категория "{{category.name}}"</h1>
+
+  <input type="hidden" name="_method" value="put" />
+  <input type="hidden" name="_id" value="{{category._id}}" />
+  <input type="hidden" name="createAt" value="{{category.createAtISO}}" />
+
+  <!--<br><br>-->
+
+  <div class="">
+
+    <div class="control-group">
+      <label class="control-label" for="inputCost">Наименование:</label>
+      <div class="controls">
+
+        <input type="text" id="inputCost" name="name" value="{{category.name}}">
+
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label class="control-label" for="inputDate">Путь (по английски):</label>
+      <div class="controls">
+        <input type="text" id="inputDate" name="url" value="{{category.url}}">
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label class="control-label" for="inputOrder">Порядковый номер:</label>
+      <div class="controls">
+        <input type="number" id="inputOrder" name="order" value="{{category.order}}">
+      </div>
+    </div>
+
+
+    <div class="control-group">
+      <div class="controls">
+        <label class="checkbox">
+          <input type='hidden' value="false" name='active'>
+          <input type="checkbox" name="active" value="true" {{#category.active}}checked{{/category.active}}>
+          Категория активна
+        </label>
+
+      </div>
+    </div>
+
+  </div>
+
+
+
+
+</form>
+

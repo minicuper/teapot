@@ -1,0 +1,169 @@
+
+
+<form id="editForm" class="form-horizontal" method=post action="/admin/product/{{product._id}}">
+
+  <div class="btn-group">
+    <button type="submit" class="btn btn-primary">Сохранить</button>
+    <a class="btn" href="/admin/product/{{product._id}}/edit">Отменить</a>
+  </div>
+
+
+  <h1>{{product.name}}</h1>
+
+  {{#product._id}}
+  <a href="{{product.main_image}}" class="thumbnail" target="_blank" style="width: 120px;">
+    <img height="80" width="120" src="{{product.main_image}}" style="margin:0; padding:0">
+  </a>
+  {{/product._id}}
+
+
+  {{#product._id}}
+  <input type="hidden" name="_method" value="put" />
+  <input type="hidden" name="_id" value="{{product._id}}">
+  <input type="hidden" name="date" value="{{product.dateISO}}">
+  {{/product._id}}
+
+
+
+  <label class="control-label1">
+    Наименование товара:
+  </label>
+  <input type="text" name="name" class="input-xxlarge" value="{{product.name}}" required placeholder="Введите наименование товара">
+
+  <label>
+    Категория:
+  </label>
+  <select class="category-select" form="editForm" name="category">
+    {{#categories}}
+      <option {{#selected}}selected{{/selected}} value="{{_id}}">{{name}}</option>
+    {{/categories}}
+  </select>
+
+  <br><br>
+
+  <label class="checkbox">
+    <input type="checkbox" name="active" value="true" {{#product.active}}checked{{/product.active}}>
+    Показывать товар в магазине
+  </label>
+
+  <!--<br>-->
+
+  <textarea id="text" name="description" rows="12" cols="50" style="width:530px" required placeholder="Введите описание товара">{{product.description}}</textarea>
+
+  <label>
+    Количество:
+  </label>
+  <input type="number" name="count" value="{{product.count}}" min="0" max="100000" step="1">
+
+  <label>
+    Цена:
+  </label>
+  <input type="number" name="price" value="{{product.price}}" required min="0" max="100000" step="100">
+
+  <label>
+    В чем измеряется:
+  </label>
+  <input type="text" name="unit" value="{{product.unit}}" placeholder="шт.">
+
+  <label class="control-label1">
+    Основное изображение:
+  </label>
+  <input type="text" name="main_image" class="span9" value="{{product.main_image}}" required placeholder="Введите ссылку на изображение">
+
+
+  <h3>Дополнительные изображения</h3>
+
+  <table class="table table-condensed table-bordered">
+    <thead>
+      <tr>
+        <th></th>
+        <th>Ссылка</th>
+        <th>Действие</th>
+      </tr>
+    </thead>
+    <tbody class="image-tbody">
+      {{#product.images}}
+      <tr class="image-item">
+        <th style="margin:0; padding:0; width:54px;">
+          <a href="{{.}}" class="thumbnail" target="_blank">
+            <img height="28" width="42" src="{{.}}" style="margin:0; padding:0">
+          </a>
+        </th>
+
+        <th class="input-inside">
+          <input type="text" name="images[]" value="{{.}}" class="input-wide image-url" required>
+        </th>
+        <th class="th-action">
+          <a class="btn btn-mini image-del" href="#">Удалить</a>
+        </th>
+      </tr>
+      {{/product.images}}
+    </tbody>
+  </table>
+
+  <a class="btn add-image" href="#">Добавить изображение</a>
+
+  <h3>Дополнительные ссылки</h3>
+
+  <table class="table table-condensed table-bordered">
+    <thead>
+      <tr>
+
+        <th>Заголовок</th>
+        <th>Ссылка</th>
+        <th>Действие</th>
+      </tr>
+    </thead>
+    <tbody class="ref-tbody">
+
+  {{#product.refs}}
+      <tr class="ref-item">
+        <th class="inp-name">
+          <input type="text" name="refs[{{index}}][name]" class="span4" value="{{name}}" required>
+        </th>
+        <th class="inp-url">
+          <input type="text" name="refs[{{index}}][url]" class="span4" value="{{url}}" required>
+        </th>
+        <th class="th-action">
+          <a class="btn btn-mini ref-del" href="#">Удалить</a>
+        </th>
+      </tr>
+  {{/product.refs}}
+
+      </tbody>
+  </table>
+
+  <a class="btn add-ref" href="#">Добавить ссылку</a>
+
+
+</form>
+
+<script id="image-item" type="text/template">
+  <tr class="image-item">
+    <th style="margin:0; padding:0; width:54px;">
+      <a href="#" class="thumbnail" target="_blank">
+        <img height="28" width="42" data-src="holder.js/42x28" style="margin:0; padding:0">
+      </a>
+    </th>
+    <th class="input-inside">
+      <input type="text" name="images[]" value="" class="input-wide image-url"  placeholder="Введите ссылку на изображение" required>
+    </th>
+    <th class="th-action">
+      <a class="btn btn-mini image-del" href="#">Удалить</a>
+    </th>
+  </tr>
+</script>
+
+<script id="ref-item" type="text/template">
+      <tr class="ref-item">
+        <th class="inp-name">
+          <input type="text" name="refs[][name]" class="span4" value="{{name}}" placeholder="Введите заголовок статьи" required>
+        </th>
+        <th class="inp-url">
+          <input type="text" name="refs[][url]" class="span4" value="{{url}}"  placeholder="Введите ссылку на статью" required>
+        </th>
+        <th class="th-action">
+          <a class="btn btn-mini ref-del" href="#">Удалить</a>
+        </th>
+      </tr>
+</script>

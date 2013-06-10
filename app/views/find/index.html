@@ -1,0 +1,24 @@
+<h1>Результаты поиска</h1>
+<form action="/find/" class="form-search">
+  <input name="query" type="text" class="input-xlarge search-query" value="{{query}}" placeholder="Поиск по сайту">
+  <button type="submit" class="btn">Найти</button>
+</form>
+<hr>
+{{#results}}
+<div class="media">
+  <a class="pull-left thumbnail" href="/catalog/{{_id}}">
+    <img class="media-object" src="{{main_image}}" height="80" width="120">
+  </a>
+  <div class="media-body">
+    <h4 class="media-heading">{{name}} - {{price}} руб.</h4>
+    {{{formattedDescription}}}
+  </div>
+</div>
+<br>
+<a class="btn" href="/catalog/{{_id}}">Подробнее »</a>
+<hr>
+{{/results}}
+
+{{^results}}
+<p><b>Поиск не дал результатов!</b> Попробуйте использовать другие ключевые слова.</p>
+{{/results}}

@@ -1,0 +1,28 @@
+          <h1>
+      			{{maintopic.name}}
+    			</h1>
+    			<div class="media">
+    				<a class="pull-left" href="/about/">
+                        <img class="media-object img-polaroid" data-src="holder.js/64x64" alt="64x64" style="width: auto; height: auto;" src="/img/avatar.jpg">
+                    </a>
+    				<div class="media-body">
+            {{{maintopic.formattedContent}}}
+    				</div>
+    			</div>
+    			<!--media-->
+    			<h2>
+    				Новости
+    			</h2>
+          {{#news}}
+    			<div class="media">
+    				<a class="pull-left" href="/about/">
+              <img class="media-object img-polaroid" alt="64x64" style="width: 64px; height: 64px;" src="/img/avatar.jpg">
+            </a>
+    				<div class="media-body">
+    					<h4 class="media-heading">
+    						{{name}}
+    					</h4>
+              {{{formattedContent}}}
+    				</div>
+    			</div>
+          {{/news}}

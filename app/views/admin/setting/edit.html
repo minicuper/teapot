@@ -1,0 +1,27 @@
+
+<form method=post action="/admin/setting">
+  <h1>Настройки</h1>
+
+  <div class="btn-group">
+    <button type="submit" class="btn btn-primary">Сохранить</button>
+    <a class="btn" href="/admin/setting">Отменить</a>
+  </div>
+  <br>
+  <br>
+
+  {{#setting.deliveryPrice}}
+  <input type="hidden" name="_method" value="put" />
+  <input type="hidden" name="_id" value="{{setting._id}}" />
+  {{/setting.deliveryPrice}}
+
+
+
+  <label class="control-label1" for="input1">Стоимость доставки:</label>
+  <input type="Number" id="input1" name="deliveryPrice" value="{{setting.deliveryPrice}}" placeholder="Введите стоимость" min="0">
+
+
+
+  <label class="control-label" for="input2">Валюта:</label>
+  <input type="text" id="input2" name="currencyName" value="{{setting.currencyName}}" placeholder="Введите валюту">
+
+</form>

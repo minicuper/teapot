@@ -1,0 +1,57 @@
+
+
+<form id="editForm" class="form-horizontal" method=post action="/admin/category">
+  <div class="btn-group">
+    <button type="submit" class="btn btn-primary">Сохранить</button>
+    <a class="btn" href="/admin/category/new">Отменить</a>
+  </div>
+
+  <h1>Новая категория товаров</h1>
+  <!--<input type="hidden" name="_method" value="put" />-->
+
+  <!--<br><br>-->
+
+
+  <div class="">
+
+    <div class="control-group">
+      <label class="control-label" for="inputCost">Наименование:</label>
+      <div class="controls">
+
+          <input type="text" id="inputCost" name="name" value="">
+
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label class="control-label" for="inputDate">Путь (по английски):</label>
+      <div class="controls">
+        <input type="text" id="inputDate" name="url" value="">
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label class="control-label" for="inputOrder">Порядковый номер:</label>
+      <div class="controls">
+        <input type="number" id="inputOrder" name="order" value="0">
+      </div>
+    </div>
+
+
+    <div class="control-group">
+      <div class="controls">
+        <label class="checkbox">
+          <input type="hidden" name="active" value="false">
+          <input type="checkbox" name="active" value="true" checked>
+          Показывать товары данной категории в магазине
+        </label>
+      </div>
+    </div>
+
+  </div>
+
+
+
+
+</form>
+

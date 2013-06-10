@@ -1,0 +1,21 @@
+{{#products}}
+<div id="it-{{id}}">
+  <h3>
+		{{name}}
+	</h3>
+	<img id="im-{{id}}" src="{{main_image}}">
+	<br>
+	<br>
+	<div>
+		<span>Цена: <b>{{price}}</b> руб.
+      <span>
+        <a class="btn" href="/catalog/{{_id}}">Подробнее »</a>
+        <a class="btn btn-primary into-cart" data-id="{{id}}">В корзину</a>
+      </span>
+		</span>
+	</div>
+</div>
+<hr>
+{{/products}}
+
+<!--<h3>Products</h3>-->

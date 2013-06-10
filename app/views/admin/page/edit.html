@@ -1,0 +1,36 @@
+
+<form id="editForm" class="form-horizontal" method=post action="/admin/page/{{page._id}}">
+  <div class="btn-group">
+    <button type="submit" class="btn btn-primary">Сохранить</button>
+    <a class="btn" href="/admin/page/{{page._id}}/edit">Отменить</a>
+  </div>
+
+  <h1>Редактирование страницы: "{{page.name}}"</h1>
+
+  <input type="hidden" name="_method" value="put" />
+
+  <input type="hidden" name="_id" value="{{page._id}}">
+  <input type="hidden" name="date" value="{{page.dateISO}}">
+
+  <label class="control-label1">
+    Заголовок:
+  </label>
+  <input type="text" name="name" class="input-xxlarge" value="{{page.name}}">
+
+  <label class="control-label1">
+    Путь:
+  </label>
+  <input type="text" name="url" class="input-xxlarge" value="{{page.url}}">
+
+  <br>
+  <br>
+
+  <textarea id="text" name="content" rows="12" cols="50" style="width:530px">{{page.content}}</textarea>
+
+  <label class="checkbox">
+    <input type="hidden" name="active" value="false">
+    <input type="checkbox" name="active" value="true" {{#page.active}}checked{{/page.active}}>
+    Показывать страницу
+  </label>
+
+</form>

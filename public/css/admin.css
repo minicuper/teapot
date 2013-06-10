@@ -1,0 +1,239 @@
+/* Add additional stylesheets below
+-------------------------------------------------- */
+/*
+  Bootstrap's documentation styles
+  Special styles for presenting Bootstrap's documentation and examples
+*/
+
+
+
+/* Body and structure
+-------------------------------------------------- */
+
+body {
+  position: relative;
+  padding-top: 10px;
+}
+
+/* Code in headings */
+h3 code {
+  font-size: 14px;
+  font-weight: normal;
+}
+
+
+
+/* Tweak navbar brand link to be super sleek
+-------------------------------------------------- */
+
+body > .navbar {
+  font-size: 13px;
+}
+
+/* Change the docs' brand */
+body > .navbar .brand {
+  padding-right: 0;
+  padding-left: 0;
+  margin-left: 20px;
+  float: right;
+  font-weight: bold;
+  color: #000;
+  text-shadow: 0 1px 0 rgba(255,255,255,.1), 0 0 30px rgba(255,255,255,.125);
+  -webkit-transition: all .2s linear;
+     -moz-transition: all .2s linear;
+          transition: all .2s linear;
+}
+body > .navbar .brand:hover {
+  text-decoration: none;
+  text-shadow: 0 1px 0 rgba(255,255,255,.1), 0 0 30px rgba(255,255,255,.4);
+}
+
+
+/* Icons
+------------------------- */
+.the-icons {
+  margin-left: 0;
+  list-style: none;
+}
+.the-icons li {
+  float: left;
+  width: 25%;
+  line-height: 25px;
+}
+.the-icons i:hover {
+  background-color: rgba(255,0,0,.25);
+}
+
+
+
+/* Sidenav for Docs
+-------------------------------------------------- */
+
+.bs-docs-sidenav {
+  /*width: 228px;*/
+  margin: 0 0 0;
+  padding: 0;
+  background-color: #fff;
+  -webkit-border-radius: 6px;
+     -moz-border-radius: 6px;
+          border-radius: 6px;
+  -webkit-box-shadow: 0 1px 4px rgba(0,0,0,.065);
+     -moz-box-shadow: 0 1px 4px rgba(0,0,0,.065);
+          box-shadow: 0 1px 4px rgba(0,0,0,.065);
+}
+.bs-docs-sidenav > li > a {
+  display: block;
+  /*width: 100%;*/
+  margin: 0 0 -1px;
+  padding: 8px 14px;
+  border: 1px solid #e5e5e5;
+}
+.bs-docs-sidenav > li:first-child > a {
+  -webkit-border-radius: 6px 6px 0 0;
+     -moz-border-radius: 6px 6px 0 0;
+          border-radius: 6px 6px 0 0;
+}
+.bs-docs-sidenav > li:last-child > a {
+  -webkit-border-radius: 0 0 6px 6px;
+     -moz-border-radius: 0 0 6px 6px;
+          border-radius: 0 0 6px 6px;
+}
+.bs-docs-sidenav > .active > a {
+  position: relative;
+  z-index: 2;
+  padding: 9px 15px;
+  border: 0;
+  text-shadow: 0 1px 0 rgba(0,0,0,.15);
+  -webkit-box-shadow: inset 1px 0 0 rgba(0,0,0,.1), inset -1px 0 0 rgba(0,0,0,.1);
+     -moz-box-shadow: inset 1px 0 0 rgba(0,0,0,.1), inset -1px 0 0 rgba(0,0,0,.1);
+          box-shadow: inset 1px 0 0 rgba(0,0,0,.1), inset -1px 0 0 rgba(0,0,0,.1);
+}
+/* Chevrons */
+.bs-docs-sidenav .icon-chevron-right {
+  float: right;
+  margin-top: 2px;
+  margin-right: -6px;
+  opacity: .25;
+}
+.bs-docs-sidenav > li > a:hover {
+  background-color: #f5f5f5;
+}
+.bs-docs-sidenav a:hover .icon-chevron-right {
+  opacity: .5;
+}
+.bs-docs-sidenav .active .icon-chevron-right,
+.bs-docs-sidenav .active a:hover .icon-chevron-right {
+  background-image: url(../img/glyphicons-halflings-white.png);
+  opacity: 1;
+}
+.bs-docs-sidenav.affix {
+  top: 40px;
+}
+.bs-docs-sidenav.affix-bottom {
+  position: absolute;
+  top: auto;
+  bottom: 270px;
+}
+
+.order-list tbody th {
+  cursor: pointer;
+}
+
+.order-list.table tbody th {
+  font-weight: normal;
+}
+
+.order-checkbox {
+  width: 12px;
+}
+
+.list-checkbox {
+  width: 12px;
+}
+
+/*.wide input{*/
+/*  width: 100%;*/
+/*  margin: 0;*/
+/*  padding: 0;*/
+/*}*/
+
+th.order-count-row {
+  width: 15%;
+  margin: 0;
+  padding: 4px;
+}
+
+th.order-cost-row {
+  width: 15%;
+  margin: 0;
+  padding: 4px;
+}
+
+th.order-action-row {
+  width: 15%;
+}
+
+/*.input-wide {*/
+/*  padding-bottom: 4px;*/
+/*  padding-left: 6px;*/
+/*  padding-right: 6px;*/
+/*  padding-top: 4px;*/
+/*  border: 1px solid #a9a9a9*/
+/*}*/
+
+/*.input-wide input {*/
+/*    width: 100%;*/
+/*    margin: 0; padding: 0; border: 0;*/
+/*    display: block;*/
+/*}*/
+
+.table tbody th {
+  font-weight: normal;
+}
+
+.item-list {
+  cursor: pointer;
+}
+
+input.input-wide, select.input-wide {
+  width: 100%;
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+    box-sizing: border-box;
+    height: 30px;
+}
+select.input-wide {
+  margin-bottom: 0;
+}
+
+th.input-inside {
+  margin: 0;
+  padding: 4px;
+}
+
+.clear-select {
+  padding-left: 8px !important;
+  padding-right: 8px !important;
+}
+
+div.div-select {
+  margin-bottom: 0;
+}
+.table-filter {
+  background-color: #f5f5f5;
+}
+.th-action {
+  width: 100px;
+}
+
+/*.table-hover tbody tr.table-filter:hover > th {*/
+/*  background-color: #f5f5f5;*/
+/*}*/
+/*.table-filter:hover {*/
+/*  background-color: gray !important;*/
+/*}*/
+
+/*th .input-wide {*/
+/*  padding: 0;*/
+/*  margin: 0;*/
+/*}*/

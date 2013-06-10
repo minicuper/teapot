@@ -1,0 +1,35 @@
+<h1>Список заказов</h1>
+<!--<div class="btn-toolbar">-->
+
+<!--  <a class="btn pull-right" href="#"><i class="icon-align-right"></i>Закрыть заказ</a>-->
+<!--  <a class="btn pull-right" href="#"><i class="icon-align-justify"></i>Удалить</a>-->
+
+<!--</div>-->
+
+<table class="table table-bordered table-hover _order-list">
+  <!--<caption>...</caption>-->
+  <thead>
+    <tr>
+      <th></th>
+      <th>Дата</th>
+      <th>Сумма</th>
+      <th>Получатель</th>
+      <th>Статус</th>
+      <th>Действие</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#orders}}
+    <tr class="order-item" data-id="{{_id}}">
+      <th class="order-checkbox"><input type="checkbox" value=""></th>
+      <th title="{{dateL}}">{{dateFromNow}}</th>
+      <th>{{cost}} руб.</th>
+      <th>{{buyer.name}}</th>
+      <th>{{status}}</th>
+      <th>
+        <a href="/admin/order/{{_id}}/edit" class="btn btn-mini product-edit" data-id="{{_id}}">Изменить</a>
+      </th>
+    </tr>
+    {{/orders}}
+  </tbody>
+</table>
