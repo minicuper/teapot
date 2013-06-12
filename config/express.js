@@ -47,6 +47,9 @@ module.exports = function (app, config, passport) {
     cart:       'layouts/cart',
     catalog:    'layouts/catalog',
     breadcrumb: 'layouts/breadcrumb',
+    adm_breadcrumb: 'admin/layouts/adm_breadcrumb',
+    adm_sidebar: 'admin/layouts/adm_sidebar',
+    adm_navbar: 'admin/layouts/adm_navbar',
   });
 
   app.set('view engine', 'html');

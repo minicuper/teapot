@@ -30,7 +30,7 @@ exports.list = function(req, res){
     res.locals.filter = {categoryNo: true};
   }
 
-  console.log(filter);
+  //console.log(filter);
 
   async.parallel([
     function(cb){
@@ -66,12 +66,13 @@ exports.list = function(req, res){
   function(err, result){
 
     res.render('admin/product/list', {
-      layout: 'admin/layouts/default',
-      partials: {
-        adm_breadcrumb: 'admin/layouts/adm_breadcrumb',
-        adm_sidebar: 'admin/layouts/adm_sidebar',
-        adm_navbar: 'admin/layouts/adm_navbar',
-      }
+      layout: 'admin/layouts/default'
+      // ,
+      // partials: {
+      //   adm_breadcrumb: 'admin/layouts/adm_breadcrumb',
+      //   adm_sidebar: 'admin/layouts/adm_sidebar',
+      //   adm_navbar: 'admin/layouts/adm_navbar',
+      // }
     });
 
   });
@@ -107,12 +108,13 @@ exports.new = function(req, res){
 
 
     res.render('admin/product/edit', {
-      layout: 'admin/layouts/default',
-      partials: {
-        adm_breadcrumb: 'admin/layouts/adm_breadcrumb',
-        adm_sidebar: 'admin/layouts/adm_sidebar',
-        adm_navbar: 'admin/layouts/adm_navbar',
-      }
+      layout: 'admin/layouts/default'
+      // ,
+      // partials: {
+      //   adm_breadcrumb: 'admin/layouts/adm_breadcrumb',
+      //   adm_sidebar: 'admin/layouts/adm_sidebar',
+      //   adm_navbar: 'admin/layouts/adm_navbar',
+      // }
     });
 
   });
@@ -121,7 +123,7 @@ exports.new = function(req, res){
 exports.create = function(req, res){
   var doc = new Product(req.body);
 
-  doc.save(); console.log(doc);
+  doc.save(); //console.log(doc);
 
   res.redirect('/admin/product?category=' + doc.category);
 }
@@ -152,7 +154,7 @@ exports.edit = function(req, res, next){
     function(cb){
       Product.findById(req.params.id).exec(function (err, docs) {
 
-        console.log('product - was here');
+        //console.log('product - was here');
 
         res.locals.product = docs;
 
@@ -168,7 +170,7 @@ exports.edit = function(req, res, next){
     function(cb){
       Category.find().exec(function (err, docs) {
 
-        console.log('category - was here');
+        //console.log('category - was here');
 
         _.each(docs, function(doc){
           doc.selected = doc._id.equals(categoryId);
@@ -186,17 +188,18 @@ exports.edit = function(req, res, next){
   function(err, result){
 
     if (err) {
-      console.log('Ошибка при получении товара и категории из БД!');
+      //console.log('Ошибка при получении товара и категории из БД!');
       return next(err)
     }
 
     res.render('admin/product/edit', {
-      layout: 'admin/layouts/default',
-      partials: {
-        adm_breadcrumb: 'admin/layouts/adm_breadcrumb',
-        adm_sidebar: 'admin/layouts/adm_sidebar',
-        adm_navbar: 'admin/layouts/adm_navbar',
-      }
+      layout: 'admin/layouts/default'
+      // ,
+      // partials: {
+      //   adm_breadcrumb: 'admin/layouts/adm_breadcrumb',
+      //   adm_sidebar: 'admin/layouts/adm_sidebar',
+      //   adm_navbar: 'admin/layouts/adm_navbar',
+      // }
     });
 
   });
@@ -208,7 +211,7 @@ exports.update = function(req, res, next){
 
   if (!req.body.active) {req.body.active = false;}
 
-  console.log('Before save: ', req.body);
+  //console.log('Before save: ', req.body);
 
   delete req.body._id;
 
@@ -217,7 +220,7 @@ exports.update = function(req, res, next){
     if( err || !saved ) {
       console.log("Post not updated: "+err);
     } else {
-      console.log("Post updated: %s", saved);
+      //console.log("Post updated: %s", saved);
     }
 
     if (err) {return next(err)}

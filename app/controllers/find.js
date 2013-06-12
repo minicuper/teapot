@@ -44,7 +44,7 @@ exports.index = function(req, res, next){
     var results = [];
 
     if (err) {
-      console.log('error in find: ', err);
+      //console.log('error in find: ', err);
       return next(new Error('Page not found!'));
     }
 
@@ -56,8 +56,8 @@ exports.index = function(req, res, next){
 
     res.locals.results = results;
 
-    console.log('output: ', output);
-    console.log('results: ', results);
+    //console.log('output: ', output);
+    //console.log('results: ', results);
 
     res.render('find/index');
 

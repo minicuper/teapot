@@ -42,9 +42,12 @@
   	<tbody class="cart-body">
         {{#def_cart}}
         <tr class="ci-{{id}}">
-        <td><a href="/catalog/{{id}}">{{name}}</a></td>
-        <td class="hidden-tablet">  {{count}} {{unit}}</td>
-        <td> {{cost}} {{setting.currencyName}}</td>
+        <td class="name"><a href="/catalog/{{id}}">{{name}}</a></td>
+        <!--<td>  {{count}} </td>-->
+        <td class="input-inside count">
+          <input type="Number" value="{{count}}" min="1" max="{{max_count}}" class="input-wide count-input" style="width: 100%">
+        </td>
+        <td class="cost"> {{cost}} {{setting.currencyName}}</td>
         <td><a class=close href="#">&times;</a></td>
         </tr>
         {{/def_cart}}

@@ -42,7 +42,7 @@ exports.index = function(req, res){
     },
     function (cb){
       Page.findOne({url: 'main'}).exec(function (err, docs) {
-        console.log('main page: ',docs);
+        //console.log('main page: ',docs);
         //if (docs !== null && docs.length > 0) {
           res.locals.maintopic = docs;
         //}
@@ -84,7 +84,7 @@ exports.get_test = function(req, res){
 };
 
 exports.post_test = function(req, res){
-  console.log(req.body);
+  //console.log(req.body);
   
   res.redirect('/');
 

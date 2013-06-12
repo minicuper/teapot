@@ -38,7 +38,7 @@ res.locals.title = "Teapot - Заказы"
 
   Order.findById(req.params.id).exec(function (err, docs) {
 
-    console.log('order - was here');
+    //console.log('order - was here');
 
     if (err) return err;
 
@@ -49,12 +49,13 @@ res.locals.title = "Teapot - Заказы"
     // ];
 
     res.render('admin/order/read', {
-      layout: 'admin/layouts/default',
-      partials: {
-        adm_breadcrumb: 'admin/layouts/adm_breadcrumb',
-        adm_sidebar: 'admin/layouts/adm_sidebar',
-        adm_navbar: 'admin/layouts/adm_navbar',
-      }
+      layout: 'admin/layouts/default'
+      // ,
+      // partials: {
+      //   adm_breadcrumb: 'admin/layouts/adm_breadcrumb',
+      //   adm_sidebar: 'admin/layouts/adm_sidebar',
+      //   adm_navbar: 'admin/layouts/adm_navbar',
+      // }
     });
 
 
@@ -106,7 +107,7 @@ exports.list = function(req, res){
 
   Order.find().exec(function (err, docs) {
 
-    console.log('order - was here');
+    //console.log('order - was here');
 
     if (err) return err;
 
@@ -117,12 +118,13 @@ exports.list = function(req, res){
     // ];
 
     res.render('admin/order/list', {
-      layout: 'admin/layouts/default',
-      partials: {
-        adm_breadcrumb: 'admin/layouts/adm_breadcrumb',
-        adm_sidebar: 'admin/layouts/adm_sidebar',
-        adm_navbar: 'admin/layouts/adm_navbar',
-      }
+      layout: 'admin/layouts/default'
+      // ,
+      // partials: {
+      //   adm_breadcrumb: 'admin/layouts/adm_breadcrumb',
+      //   adm_sidebar: 'admin/layouts/adm_sidebar',
+      //   adm_navbar: 'admin/layouts/adm_navbar',
+      // }
     });
 
 

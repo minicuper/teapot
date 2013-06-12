@@ -1,0 +1,6 @@
+config/config.js
+node_modules/
+data/
+.c9revisions/
+.forever/
+mongod

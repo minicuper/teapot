@@ -19,7 +19,7 @@ exports.list = function(req, res){
   
   Page.find().exec(function (err, docs) {
     
-    console.log('page - was here');
+    //console.log('page - was here');
     
     if (err) return err;
   
@@ -30,12 +30,13 @@ exports.list = function(req, res){
     ];
     
     res.render('admin/page/list', {
-      layout: 'admin/layouts/default',
-      partials: {
-        adm_breadcrumb: 'admin/layouts/adm_breadcrumb',
-        adm_sidebar: 'admin/layouts/adm_sidebar',
-        adm_navbar: 'admin/layouts/adm_navbar',
-      }
+      layout: 'admin/layouts/default'
+      // ,
+      // partials: {
+      //   adm_breadcrumb: 'admin/layouts/adm_breadcrumb',
+      //   adm_sidebar: 'admin/layouts/adm_sidebar',
+      //   adm_navbar: 'admin/layouts/adm_navbar',
+      // }
     });
   
     
@@ -92,7 +93,7 @@ exports.new = function(req, res){
 exports.create = function(req, res){
   var doc = new Page(req.body);
   
-  doc.save(); console.log(doc);
+  doc.save(); //console.log(doc);
   
   res.redirect('/admin/page');
 }
@@ -146,7 +147,7 @@ exports.edit = function(req, res){
 }
 
 exports.update = function(req, res){
-  console.log('Old ', req.body);
+  //console.log('Old ', req.body);
   
   var obj = {}
     , id = req.body._id;
@@ -160,7 +161,7 @@ exports.update = function(req, res){
     if( err || !saved ) {
       console.log("Post not updated: "+err);
     } else {
-      console.log("Post updated: %s", saved);
+      //console.log("Post updated: %s", saved);
     }
     
     res.redirect('/admin/page');

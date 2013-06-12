@@ -15,23 +15,40 @@ var app = app || {};
       this.model.on('change', this.onChangeModel);
     },
     events: {
-      'click .close': 'clickClose'
+      'click .close': 'clickClose',
+      'change .count-input': 'changeCount'
     },
-    template: Hogan.compile('<td><a href="/catalog/{{id}}">{{name}}</a></td>' +
-                            '<td class=hidden-tablet>	{{count}} {{unit}}</td>' +
-                            '<td> {{cost}} руб.</td>' +
+    template: Hogan.compile('<td class="name"><a href="/catalog/{{id}}">{{name}}</a></td>' +
+                            '<td class="hidden-tablet text-count">	{{count}} {{unit}}</td>' +
+                            '<td class="cost"> {{cost}} руб.</td>' +
                             '<td><a class=close>&times;</a></td>'),
 
     onDestroyModel: function(){
       this.remove();
     },
     onChangeModel: function(){
-      this.render();
+      this.$el.find('.text-count').text(this.model.get('count') +' ' + this.model.get('unit'));
+      this.$el.find('.cost').text(this.model.get('cost') +' ' + app.currencyName);
+      //this.$el.find('.count-input').val(this.model.get('count'));
+
+      //this.render();
     },
     clickClose: function (){
       this.model.destroy();
       //console.log(this.model.get('id'));
       return false;
+    },
+    changeCount: function(event){
+      var $element = $(event.target);
+      var model = this.model;
+
+      model.set('count', $element.val(), {silent: true});
+      model.set('cost', model.get('count') * model.get('price'));
+      // this.$el.find('.cost').text (model.get('cost') +' ' + app.currencyName);
+      model.save();
+      // app.cart_view.calculateTotal();
+
+      // console.log(event);
     },
     render: function(){
       var content = this.template.render(this.model.toJSON());
@@ -47,10 +64,16 @@ var app = app || {};
       this.collection.on('add', this.onAddCollection);
       this.collection.on('reset', this.onResetCollection);
       this.collection.on('remove', this.onRemoveCollection);
+      this.collection.on('change', this.onChangeCollection);
       //this.collection.fetch();
+    },
+    onChangeCollection: function(){
+      //console.log('onChangeCollection');
+      this.calculateTotal();
     },
 
     calculateTotal: function(){
+      //console.log('calculateTotal');
       var total = app.deliveryPrice;
       this.collection.each(function(model){
         total += model.get('cost');
@@ -61,6 +84,7 @@ var app = app || {};
 
 
     onAddCollection: function (model){
+      //console.log('onAddCollection');
         var view = new CartItemView({model: model});
         var content = view.render().el;
         $('.cart-delivery').before(content);
@@ -70,6 +94,7 @@ var app = app || {};
         this.calculateTotal();
     },
     onResetCollection: function(){
+      //console.log('onResetCollection');
       this.setElement($('.main-cart'));
 
       if (this.collection.models.length === 0) {
@@ -97,79 +122,68 @@ var app = app || {};
       this.calculateTotal();
     },
     onRemoveCollection: function (){
+      //console.log('onRemoveCollection');
       if (this.collection.models.length === 0) {
         $('.empty-cart').removeClass('hidden');
         $('.full-cart').addClass('hidden');
       };
       this.calculateTotal();
     },
-    addToCart: function(id, count){
+    addToCart: function(id, count, cb){
+      //console.log('addToCart');
       var curModel = undefined
         , col = this.collection
         //, saveModel = false
-        , result = 0;
+        //, result = 0;
       ;
 
-      async.parallel([
-        function(callback){
-          col.each(function(model){
-            if (model.get('id') === id) {
-              curModel = model;
-            }
-          });
-          callback(null);
-        },
-        function(callback){
-          $.getJSON('/catalog/'+id)
-          .done(function(data) {
 
-            col.add(data);
-            curModel = col.models[col.length - 1];
-            //saveModel = true;
-            //console.log(model, ' -model');
-            callback(null);
-          })
-          .fail(function(data) {
-            curModel = undefined;
-            callback(null);
-          });
+      col.each(function(model){
+        if (model.get('id') === id) {
+          curModel = model;
         }
-      ],
-      function(err){
-
-        if (err) {
-          result = 0;
-          return;
-        }
-
-        if (curModel !== undefined) {
-          var tot = curModel.get('count') + count,
-              max = curModel.get('max_count');
-
-          if (tot > max) {
-            tot = max;
-          } else if (tot < 0) {
-            tot = 0;
-          }
-
-          var l_count = tot - curModel.get('count');
-
-          curModel.set('count', curModel.get('count') + l_count);
-          curModel.set('cost', curModel.get('count') * curModel.get('price'));
-
-          curModel.save();
-
-          result = l_count;
-
-        }
-        else {
-          result = 0;
-        }
-
       });
 
-      return result;
-    }
+      if (curModel !== undefined) {//В корзине уже есть такой товар
+        var tot = curModel.get('count') + count,
+            max = curModel.get('max_count');
+
+        if (tot > max) {
+          tot = max;
+        } else if (tot < 0) {
+          tot = 0;
+        }
+
+        var l_count = tot - curModel.get('count');
+
+        curModel.set('count', curModel.get('count') + l_count, {silent: true});
+        curModel.set('cost', curModel.get('count') * curModel.get('price'));
+
+        curModel.save();
+
+        //this.calculateTotal();
+
+        cb(l_count);
+
+      } else { //Такого товара еще нет в корзине
+
+        $.getJSON('/catalog/'+id)
+        .done(function(data) {
+          data.count = count;
+          data.cost = count * data.price;
+          col.add(data);
+          curModel = col.models[col.length - 1];
+          curModel.save();
+          cb(count);
+        })
+        .fail(function(data) {
+          //curModel = undefined;
+          cb(0);
+        });
+
+      }
+
+    } //end of addToCart
   });
 
 
@@ -227,7 +241,9 @@ $(function(){
     if ($(this).attr('disabled') !== 'disabled') {
       var id = $(event.target).attr('data-id');
         app.animateImageToCart(id);
-        var in_cart = app.cart_view.addToCart(id, 1);
+        var in_cart = app.cart_view.addToCart(id, 1, function(n){
+          return;
+        });
         //console.log(in_cart);
     }
   });

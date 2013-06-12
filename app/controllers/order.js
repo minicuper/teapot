@@ -54,16 +54,16 @@ var sendmail_to_bayer = function(order){
 
   };
 
-  console.log('Sending Mail');
+  //console.log('Sending Mail');
 
   transport.sendMail(message, function(error){
 
     if(error){
-        console.log('Error occured');
-        console.log(error.message);
+        //console.log('Error occured');
+        //console.log(error.message);
         return;
     }
-    console.log('Message sent successfully!');
+    //console.log('Message sent successfully!');
 
     // if you don't want to use this transport object anymore, uncomment following line
     //transport.close(); // close the connection pool
@@ -84,11 +84,11 @@ var sendmail_to_seller = function(order){
 
   transport.sendMail(message, function(error){
     if(error){
-        console.log('Error occured');
-        console.log(error.message);
+        //console.log('Error occured');
+        //console.log(error.message);
         return;
     }
-    console.log('Message sent successfully!');
+    //console.log('Message sent successfully!');
 
     // if you don't want to use this transport object anymore, uncomment following line
     //transport.close(); // close the connection pool
@@ -142,7 +142,7 @@ var make_order = function(req, res, cart){
 
 // Меняем складские остатки
 var change_stock = function(body, cart){
-  console.log('function: change_stock')
+  //console.log('function: change_stock')
 
   var change_stock_by_id = function(id, count){
 
@@ -198,7 +198,7 @@ exports.makeOrder = function(req, res){
     res.locals.delivery = del_arr[del_arr.length - 1];
   }
 
-  console.log(req.sessionID);
+  //console.log(req.sessionID);
 
   //req.flash('info', 'Flash is back!')
 

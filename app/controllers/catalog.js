@@ -34,7 +34,7 @@ exports.show = function(req, res, next){
     Product.findById(req.params.id, function (err, doc){
 
       if (err) {
-        console.log('error in individual product');
+        //console.log('error in individual product');
         return next(new Error('Page not found!'));
       }
       if (doc.active === false || doc.count === 0){
@@ -52,7 +52,7 @@ exports.show = function(req, res, next){
     Product.findById(req.params.id, function (err, doc){
 
       if (err) {
-        console.log('error in individual product');
+        //console.log('error in individual product');
         return next(new Error('Page not found!'));
       }
       var respond = {
@@ -114,7 +114,7 @@ exports.index_cat = function(req, res, next){
 
         cat_id = doc._id;
         cat = doc;
-        console.log(cat_id);
+        //console.log(cat_id);
         callback();
 
       });

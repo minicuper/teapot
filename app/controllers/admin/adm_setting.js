@@ -30,12 +30,13 @@ exports.edit = function(req, res, next){
     res.locals.setting = doc;
 
     res.render('admin/setting/edit', {
-      layout: 'admin/layouts/default',
-      partials: {
-        adm_breadcrumb: 'admin/layouts/adm_breadcrumb',
-        adm_sidebar: 'admin/layouts/adm_sidebar',
-        adm_navbar: 'admin/layouts/adm_navbar',
-      }
+      layout: 'admin/layouts/default'
+      // ,
+      // partials: {
+      //   adm_breadcrumb: 'admin/layouts/adm_breadcrumb',
+      //   adm_sidebar: 'admin/layouts/adm_sidebar',
+      //   adm_navbar: 'admin/layouts/adm_navbar',
+      // }
     });
 
   });
@@ -52,7 +53,7 @@ exports.create = function(req, res, next){
     }
     req.flash('success', 'Настройки сохранены.');
     res.redirect('/admin/setting');
-    
+
     set.init();
   });
 
@@ -69,7 +70,7 @@ exports.update = function(req, res, next){
     if( err || !saved ) {
       console.log("Post not updated: "+err);
     } else {
-      console.log("Post updated: %s", saved);
+      //console.log("Post updated: %s", saved);
     }
 
     if (err) {
@@ -79,7 +80,7 @@ exports.update = function(req, res, next){
     req.flash('success', 'Настройки сохранены.');
 
     res.redirect('/admin/setting');
-    
+
     set.init();
 
   });
