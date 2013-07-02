@@ -11,6 +11,7 @@
   <thead>
     <tr>
       <th></th>
+      <th>№</th>
       <th>Дата</th>
       <th>Сумма</th>
       <th>Получатель</th>
@@ -22,6 +23,7 @@
     {{#orders}}
     <tr class="order-item" data-id="{{_id}}">
       <th class="order-checkbox"><input type="checkbox" value=""></th>
+      <th>{{_id}}</th>
       <th title="{{dateL}}">{{dateFromNow}}</th>
       <th>{{cost}} руб.</th>
       <th>{{buyer.name}}</th>

@@ -1,8 +1,14 @@
 $(function(){
-  // $('tr.list-item').click(function(event){
-  //   var id = $(event.currentTarget).attr('data-id');
-  //   document.location.href = '/admin/page/'+id+'/edit';
-  // });
 
-  // $('.list-checkbox').click(function(event){ event.stopPropagation() });
+  $('#text').wysihtml5({
+		"locale": "ru-RU",
+		"font-styles": true, //Font styling, e.g. h1, h2, etc. Default true
+		"emphasis": true, //Italics, bold, etc. Default true
+		"lists": true, //(Un)ordered lists, e.g. Bullets, Numbers. Default true
+		"html": true, //Button which allows you to edit the generated HTML. Default false
+		"link": true, //Button to insert a link. Default true
+		"image": true, //Button to insert an image. Default true,
+		"color": false //Button to change color of font
+	});
+
 })

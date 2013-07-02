@@ -44,20 +44,6 @@ module.exports = function (app, passport, auth) {
 
   app.get('/find/', find.index);
 
-  // app.get('/addcat/',    function(req, res){
-  //     cat = new Category({name: "Чайники", url: "teapots", active: true });
-  //     cat.save();
-
-  //     cat = new Category({name: "Доски", url: "teabords", active: true });cat.save();
-  //     cat = new Category({name: "Чашки", url: "teacups", active: true });cat.save();
-  //     cat = new Category({name: "Гайвани", url: "gaivans", active: true });cat.save();
-  //     cat = new Category({name: "Фигурки", url: "teapets", active: true });cat.save();
-  //     console.log(cat);
-
-  //     res.redirect('/');
-
-  // });
-
   // cart routes
 
   var cart = require('../app/controllers/cart');
@@ -65,7 +51,17 @@ module.exports = function (app, passport, auth) {
   app.get ('/cart',       cart.list);
   app.put ('/cart/:id',   cart.update);
   app.del ('/cart/:id',   cart.delete);
-  app.post('/cart/:id',   cart.create);
+  //app.post('/cart/:id',   cart.create);
+
+  var paysto = require('../app/controllers/paysto');
+
+  app.post('/paysto/check',   paysto.postCheck);
+  app.post('/paysto/result',   paysto.postResult);
+  app.post('/paysto/return',   paysto.postReturn);
+
+  app.get('/paysto/check',   paysto.postCheck);
+  app.get('/paysto/result',   paysto.postResult);
+  app.get('/paysto/return',   paysto.postReturn);
 
   // Админка +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 

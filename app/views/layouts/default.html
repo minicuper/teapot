@@ -26,18 +26,32 @@
   </head>
   <body>
     <div class="container">
-    {{#errors}}
-    <div class="alert alert-error">
+    {{#success}}
+    <div class="alert alert-success">
         <a href="#" class="close" data-dismiss="alert">&times;</a>
-        <strong>Ошибка! </strong>{{.}}
+        <strong>Успех! </strong>{{.}}
     </div>
-    {{/errors}}
-      <div class="top-line">
-    	<span>
-              <i class="icon-phone-sign"></i>
-  		    <a href="tel:+79056278964">+7 (905) 62-789-64</a>
-          </span>
-  	  </div>
+    {{/success}}
+
+    {{#info}}
+    <div class="alert alert-info">
+        <a href="#" class="close" data-dismiss="alert">&times;</a>
+        <strong>Информация! </strong>{{.}}
+    </div>
+    {{/info}}
+
+    {{#warning}}
+    <div class="alert alert-block">
+        <a href="#" class="close" data-dismiss="alert">&times;</a>
+        <strong>Внимание! </strong>{{.}}
+    </div>
+    {{/warning}}
+     <!-- <div class="top-line">-->
+    	<!--<span>-->
+     <!--         <i class="icon-phone-sign"></i>-->
+  		 <!--   <a href="tel:+79056278964">+7 (905) 62-789-64</a>-->
+     <!--     </span>-->
+  	  <!--</div>-->
 
       {{>navbar}}
 
@@ -45,13 +59,15 @@
     		<div class="span3">
         {{>catalog}}
         {{>cart}}
+        <!--<img src='/img/visa.png'>-->
+        <!--<img src='/img/mastercard.png'>-->
     		</div>
     		<!--/span-->
     		<div class="span9">
     			{{>breadcrumb}}
-
+          <div class="content">
     			{{{ yield }}}
-
+          </div>
     		</div>
     		<!--/span-->
     	</div>
@@ -59,11 +75,15 @@
     	<hr>
     	<footer>
     		<p style="text-align: center;">
-    			TeaPot © Company 2013
+    			<!-- begin paysto verification --><a href="http://paysto.ru/fromshop=21008" target="_blank">Совместно с PAYSTO</a><!-- end paysto verification -->
     		</p>
     	</footer>
     </div>
     <!--/.container-->
+
+
+
+
     <script>
       var app = app || {};
       app.def_cart      = {{{def_cart_JSON}}};

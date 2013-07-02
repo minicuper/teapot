@@ -3,7 +3,7 @@
 	<h2>
 		{{name}}{{#disabled}} <span class="label label-important">Не продается!</span>{{/disabled}}
 	</h2>
-	<img id="im-{{id}}" src="{{main_image}}">
+	<img id="im-{{id}}" src="{{main_image_normal}}">
 	<div>
 		<h3>
 			Описание
@@ -14,7 +14,7 @@
               <img class="media-object  img-polaroid" data-src="holder.js/64x64" alt="64x64" style="width: auto; height: auto;" src="/img/avatar.jpg">
           </a>
 			<div class="media-body">
-        {{{formattedDescription}}}
+        {{{description}}}
 			</div>
 		</div>
 		<p>
@@ -31,7 +31,7 @@
 		</h3>
     {{/product_img_empty}}
     {{#images}}
-		<img src="{{.}}">
+		<img src="{{url_normal}}">
 		{{/images}}
     {{^product_ref_empty}}
 		<h3>

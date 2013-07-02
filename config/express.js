@@ -96,6 +96,11 @@ module.exports = function (app, config, passport) {
     app.use(settings.setLocals);
     app.use(cart.getCart);
 
+    app.use(function(req, res, next){
+      console.log('session: ', req.sessionID);
+      next();
+    });
+
     // routes should be at the last
     app.use(app.router);
 

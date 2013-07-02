@@ -8,7 +8,7 @@ var mongoose = require('mongoose')
   , env = process.env.NODE_ENV || 'development'
   , config = require('../../config/config')[env]
   //, imagerConfig = require(config.root + '/config/imager.js')
-  , moment = require('moment')  
+  , moment = require('moment')
   , Schema = mongoose.Schema
   , _ = require('underscore')
 
@@ -32,7 +32,7 @@ var NewsSchema = new Schema({
 })
 
 
-NewsSchema.virtual('activeYN').get(function() { 
+NewsSchema.virtual('activeYN').get(function() {
   if (this.active === true) {
     return 'Да';
   } else {
@@ -40,24 +40,24 @@ NewsSchema.virtual('activeYN').get(function() {
   }
 });
 
-NewsSchema.virtual('dateISO').get(function() { 
+NewsSchema.virtual('dateISO').get(function() {
   var date = new Date(this.date);
   return date.toISOString();
 });
 
-NewsSchema.virtual('dateFromNow').get(function() { 
+NewsSchema.virtual('dateFromNow').get(function() {
     moment.lang('ru');
     var date = new Date(this.date);
     return moment(date).zone('+0400').fromNow();
 });
 
-NewsSchema.virtual('dateLocal').get(function() { 
+NewsSchema.virtual('dateLocal').get(function() {
     moment.lang('ru');
     var date = new Date(this.date);
     return moment(date).zone('+0400').format('LLL');
 });
 
-NewsSchema.virtual('formattedContent').get(function() { 
+NewsSchema.virtual('formattedContent').get(function() {
   var res = '', ar = this.content.split(/\r\n/);
   _.each(ar, function(val){
     res += '<p>' + val + '</p>\r\n';
@@ -74,7 +74,7 @@ NewsSchema.virtual('formattedContent').get(function() {
 /**
  * Methods
  */
- 
+
 
 
 /**

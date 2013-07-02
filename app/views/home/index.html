@@ -6,10 +6,11 @@
                         <img class="media-object img-polaroid" data-src="holder.js/64x64" alt="64x64" style="width: auto; height: auto;" src="/img/avatar.jpg">
                     </a>
     				<div class="media-body">
-            {{{maintopic.formattedContent}}}
+            {{{maintopic.content}}}
     				</div>
     			</div>
     			<!--media-->
+          {{#shownews}}
     			<h2>
     				Новости
     			</h2>
@@ -22,7 +23,8 @@
     					<h4 class="media-heading">
     						{{name}}
     					</h4>
-              {{{formattedContent}}}
+              {{{content}}}
     				</div>
     			</div>
           {{/news}}
+          {{/shownews}}

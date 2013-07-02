@@ -61,6 +61,16 @@ exports.new = function(req, res){
   res.locals.sidebar = {newsclass: "active"};
 
 
+    res.locals.css = [
+      'bootstrap-wysihtml5.css'
+    ];
+
+    res.locals.scripts = [
+      '/js/lib/wysihtml5/wysihtml5-0.4.0pre.min.js',
+      '/js/lib/wysihtml5/bootstrap-wysihtml5.js',
+      '/js/lib/wysihtml5/bootstrap-wysihtml5.ru-RU.js',
+      '/js/adm/adm.news.new.js'
+    ];
 
   // res.locals.scripts = [
   //   'cleditor/jquery.cleditor.js',
@@ -76,12 +86,13 @@ exports.new = function(req, res){
 
 
   res.render('admin/news/new', {
-    layout: 'admin/layouts/default',
-    partials: {
-      adm_breadcrumb: 'admin/layouts/adm_breadcrumb',
-      adm_sidebar: 'admin/layouts/adm_sidebar',
-      adm_navbar: 'admin/layouts/adm_navbar',
-    }
+    layout: 'admin/layouts/default'
+    // ,
+    // partials: {
+    //   adm_breadcrumb: 'admin/layouts/adm_breadcrumb',
+    //   adm_sidebar: 'admin/layouts/adm_sidebar',
+    //   adm_navbar: 'admin/layouts/adm_navbar',
+    // }
   });
 
 
@@ -112,12 +123,16 @@ exports.edit = function(req, res){
   res.locals.sidebar = {newsclass: "active"};
 
 
+    res.locals.css = [
+      'bootstrap-wysihtml5.css'
+    ];
 
-  // res.locals.scripts = [
-  //   'moment/moment.js',
-  //   'moment/lang/ru.js',
-  //   'adm.order.status.js'
-  // ];
+    res.locals.scripts = [
+      '/js/lib/wysihtml5/wysihtml5-0.4.0pre.min.js',
+      '/js/lib/wysihtml5/bootstrap-wysihtml5.js',
+      '/js/lib/wysihtml5/bootstrap-wysihtml5.ru-RU.js',
+      '/js/adm/adm.news.new.js'
+    ];
 
   News.findById(req.params.id).exec(function (err, docs) {
 
@@ -134,12 +149,13 @@ exports.edit = function(req, res){
     // ];
 
     res.render('admin/news/edit', {
-      layout: 'admin/layouts/default',
-      partials: {
-        adm_breadcrumb: 'admin/layouts/adm_breadcrumb',
-        adm_sidebar: 'admin/layouts/adm_sidebar',
-        adm_navbar: 'admin/layouts/adm_navbar',
-      }
+      layout: 'admin/layouts/default'
+      // ,
+      // partials: {
+      //   adm_breadcrumb: 'admin/layouts/adm_breadcrumb',
+      //   adm_sidebar: 'admin/layouts/adm_sidebar',
+      //   adm_navbar: 'admin/layouts/adm_navbar',
+      // }
     });
 
 

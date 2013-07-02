@@ -41,10 +41,29 @@ var app = app || {};
     changeCount: function(event){
       var $element = $(event.target);
       var model = this.model;
+      var count = $element.val(), new_count = count;
 
-      model.set('count', $element.val(), {silent: true});
-      model.set('cost', model.get('count') * model.get('price'));
-      // this.$el.find('.cost').text (model.get('cost') +' ' + app.currencyName);
+
+      if (count < 1) {
+        new_count = 1;
+      }
+
+      if (count > model.get('max_count')) {
+        new_count = model.get('max_count');
+      }
+
+      new_count = Math.round(new_count);
+
+      if (count !== new_count) {
+        $element.val(new_count);
+        count = new_count;
+      }
+
+
+      model.set('count', count, {silent: true});
+      model.set('cost', count * model.get('price'));
+            // this.$el.find('.cost').text (model.get('cost') +' ' + app.currencyName);
+
       model.save();
       // app.cart_view.calculateTotal();
 
@@ -145,8 +164,8 @@ var app = app || {};
       });
 
       if (curModel !== undefined) {//В корзине уже есть такой товар
-        var tot = curModel.get('count') + count,
-            max = curModel.get('max_count');
+        var tot = Number(curModel.get('count')) + count,
+            max = Number(curModel.get('max_count'));
 
         if (tot > max) {
           tot = max;
@@ -154,10 +173,10 @@ var app = app || {};
           tot = 0;
         }
 
-        var l_count = tot - curModel.get('count');
+        var l_count = tot - Number(curModel.get('count'));
 
-        curModel.set('count', curModel.get('count') + l_count, {silent: true});
-        curModel.set('cost', curModel.get('count') * curModel.get('price'));
+        curModel.set('count', Number(curModel.get('count')) + l_count, {silent: true});
+        curModel.set('cost', Number(curModel.get('count')) * Number(curModel.get('price')));
 
         curModel.save();
 
@@ -227,6 +246,23 @@ var app = app || {};
       });
   }
 
+  app.animateCantAdd = function($el) {
+    // var buttonPosition = $el.position();
+    // $('body').prepend('<div id="buttonModal">Больше нельзя добавлять!</div>');
+
+    // $('#buttonModal').css({
+    //   'position': 'absolute',
+    //   'z-index': '1999',
+    //   'left': (buttonPosition.left - 10) + 'px',
+    //   'top': (buttonPosition.top - 5) + 'px',
+    //   'width': $el.width() + 20 + 'px',
+    //   'height': $el.height() + 10 + 'px',
+    //   'backgrount-color': 'gray'
+    // });
+
+  }
+
+
   app.cart_collection = new CartCollection;
   app.cart_view = new CartView({collection: app.cart_collection});
 
@@ -237,11 +273,16 @@ var app = app || {};
 
 $(function(){
   $('.into-cart').click(function(event){
-
-    if ($(this).attr('disabled') !== 'disabled') {
+    var $el = $(this);
+    if ($el.attr('disabled') !== 'disabled') {
       var id = $(event.target).attr('data-id');
         app.animateImageToCart(id);
         var in_cart = app.cart_view.addToCart(id, 1, function(n){
+          if (n === 0) {
+            app.animateCantAdd($el);
+            console.log(n);
+          }
+
           return;
         });
         //console.log(in_cart);

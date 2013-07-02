@@ -32,5 +32,7 @@ exports.getCart = function (req, res, next) {
     }
   }
 
-  next();
+  if (next) {
+    next();
+  }
 }

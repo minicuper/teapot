@@ -29,6 +29,7 @@
     , "forever": "latest"
     , "hogan.js": "latest"
     , "moment": "latest"
+    , "mongoose-id-autoinc": "latest"
   }
   , "devDependencies": {
       "nodemon": "latest"

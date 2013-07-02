@@ -11,8 +11,12 @@ var mongoose = require('mongoose')
   , Schema = mongoose.Schema
   , moment = require('moment')
   , _ = require('underscore')
-  
+  , autoinc = require('mongoose-id-autoinc')
+
 ;
+
+//console.log('mongoose: ', mongoose);
+autoinc.init(mongoose.connections[0]);
 
 /**
  * Getters
@@ -31,40 +35,40 @@ var StatusSchema = new Schema({
     date  : {type : Date, default : Date.now},
     comment: String
   });
-  
+
 StatusSchema.virtual('dateL')
-  .get(function() { 
+  .get(function() {
     moment.lang('ru');
     var date = new Date(this.date);
     return moment(date).zone('+0400').format('LLL');
   });
 
-StatusSchema.virtual('dateISO').get(function() { 
+StatusSchema.virtual('dateISO').get(function() {
   var date = new Date(this.date);
   return date.toISOString();
 });
-  
-StatusSchema.virtual('statusCreated').get(function() { 
+
+StatusSchema.virtual('statusCreated').get(function() {
     return this.status === 'Создан';
 });
 
-StatusSchema.virtual('statusPaid').get(function() { 
+StatusSchema.virtual('statusPaid').get(function() {
     return this.status === 'Оплачен';
 });
 
-StatusSchema.virtual('statusSent').get(function() { 
+StatusSchema.virtual('statusSent').get(function() {
     return this.status === 'Отправлен';
 });
 
-StatusSchema.virtual('statusClosed').get(function() { 
+StatusSchema.virtual('statusClosed').get(function() {
     return this.status === 'Закрыт';
 });
 
-StatusSchema.virtual('statusCanseled').get(function() { 
+StatusSchema.virtual('statusCanseled').get(function() {
     return this.status === 'Отменен';
 });
 
-StatusSchema.virtual('index').get(function() { 
+StatusSchema.virtual('index').get(function() {
   return this.parentArray().indexOf(this);
 });
 
@@ -73,43 +77,90 @@ var ItemSchema = new Schema({
   id: {type : Schema.ObjectId, ref : 'Product'},
   name: String,
   count: Number,
-  cost: Number
+  cost: Number,
+  price: Number,
+  unit: String,
+  max_count: Number
 });
 
-ItemSchema.virtual('index').get(function() { 
+ItemSchema.virtual('index').get(function() {
   return this.parentArray().indexOf(this);
 });
 
+
+
+//*************************************************************************** PaySto
+
+var PaystoSchema = new Schema({
+    ip: String,
+    status: String,
+    date  : {type : Date, default : Date.now},
+    correctMD5: Boolean,
+    objJSON: String
+});
+
+PaystoSchema.virtual('index').get(function() {
+  return this.parentArray().indexOf(this);
+});
+
+PaystoSchema.virtual('dateL')
+  .get(function() {
+    moment.lang('ru');
+    var date = new Date(this.date);
+    return moment(date).zone('+0400').format('LLL');
+  });
+
+PaystoSchema.virtual('dateISO').get(function() {
+  var date = new Date(this.date);
+  return date.toISOString();
+});
+
+PaystoSchema.virtual('correctMD5YN').get(function() {
+  if (this.correctMD5 === true) {
+    return 'Да';
+  } else {
+    return 'Нет';
+  }
+});
 //*************************************************************************** ORDER
 
 var OrderSchema = new Schema({
-  
+  _id: Number,
   //проект полей
-  statuses: [StatusSchema],
+  statuses: [StatusSchema], //Создан, Оплачен, Отправлен, Закрыт, Отменен
   cost: Number,
   buyer: {
     name: String,
     email: String,
     address: String,
-    session_id: String,
+    session_id: {type:String, index: true},
     ip: String
   },
   items: [ItemSchema],
+  paysto: [PaystoSchema],
   comment_buyer: String,
   comment_seller: String,
   payment_method: String,
-  date  : {type : Date, default : Date.now}
+  tracking_number: String,
+  date  : {type : Date, default : Date.now, index: true}
+
 });
+
+/**
+ * Plugins
+ */
+
+OrderSchema.plugin(autoinc.plugin, { model: 'Order', start: 2000});
 
 /**
  * Virtuals
  */
 
 
-  
+
 OrderSchema
   .virtual('dateFromNow')
-  .get(function() { 
+  .get(function() {
     moment.lang('ru');
     var date = new Date(this.date);
     return moment(date).zone('+0400').fromNow();
@@ -117,37 +168,37 @@ OrderSchema
 
 OrderSchema
   .virtual('dateL')
-  .get(function() { 
+  .get(function() {
     moment.lang('ru');
     var date = new Date(this.date);
     return moment(date).zone('+0400').format('LLL');
   });
 
-OrderSchema.virtual('dateISO').get(function() { 
+OrderSchema.virtual('dateISO').get(function() {
     var date = new Date(this.date);
     return date.toISOString();
   });
 
 OrderSchema
   .virtual('status')
-  .get(function() { 
+  .get(function() {
     var date, status;
     _.each(this.statuses, function(item){
       if(date === undefined) {
         date = item.date;
         status = item.status;
-      }      
-      
+      }
+
       if (item.date > date) {
         date = item.date;
         status = item.status;
       }
-      
+
     });
-    
+
     return status;
 
-  });  
+  });
 /**
  * Validations
  */

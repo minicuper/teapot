@@ -93,8 +93,16 @@ exports.new = function(req, res){
 
   res.locals.sidebar = {productclass: "active"};
 
+  res.locals.css = [
+    'bootstrap-wysihtml5.css'
+  ];
+
   res.locals.scripts = [
-  '/js/adm/adm.product.edit.js'
+    '/js/lib/wysihtml5/wysihtml5-0.4.0pre.min.js',
+    '/js/lib/wysihtml5/bootstrap-wysihtml5.js',
+    '/js/lib/wysihtml5/bootstrap-wysihtml5.ru-RU.js',
+    '/js/lib/holder.js',
+    '/js/adm/adm.product.edit.js'
   ];
 
   Category.find().exec(function (err, docs) {
@@ -143,12 +151,17 @@ exports.edit = function(req, res, next){
 
   res.locals.sidebar = {productclass: "active"};
 
-  res.locals.scripts = [
-  '/js/lib/holder.js',
-  //'/js/lib/jquery.textchange.min.js',
-  '/js/adm/adm.product.edit.js'
+  res.locals.css = [
+    'bootstrap-wysihtml5.css'
   ];
 
+  res.locals.scripts = [
+    '/js/lib/wysihtml5/wysihtml5-0.4.0pre.min.js',
+    '/js/lib/wysihtml5/bootstrap-wysihtml5.js',
+    '/js/lib/wysihtml5/bootstrap-wysihtml5.ru-RU.js',
+    '/js/lib/holder.js',
+    '/js/adm/adm.product.edit.js'
+  ];
 
   async.series([
     function(cb){

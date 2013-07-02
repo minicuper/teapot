@@ -1,0 +1,264 @@
+<h3>Заказ №{{order._id}} от {{order.dateL}}</h3>
+
+<form id="editOrderForm" class="form-horizontal" method=post action="/admin/order/{{order._id}}">
+  <input type="hidden" name="_method" value="put" />
+  <input type="hidden" name="_id" value="{{order._id}}" />
+  <input type="hidden" name="date" value="{{order.dateISO}}" />
+  <input type="hidden" name="status" value="{{order.status}}" />
+  <input type="hidden" name="payment_method" value="{{order.payment_method}}" />
+
+  <div class="btn-group">
+    <button type="submit" class="btn btn-primary">Сохранить</button>
+    <a class="btn" href="/admin/order/{{order._id}}/edit">Отменить</a>
+  </div>
+  <br>
+  <br>
+
+
+  <div class="tabbable"> <!-- Only required for left/right tabs -->
+    <ul class="nav nav-tabs">
+      <li class="active"><a href="#tab1" data-toggle="tab">Общая информация</a></li>
+      <li><a href="#tab2" data-toggle="tab">Состав заказа</a></li>
+      <li><a href="#tab3" data-toggle="tab">Покупатель</a></li>
+      <li><a href="#tab4" data-toggle="tab">Изменение статуса</a></li>
+      <li><a href="#tab5" data-toggle="tab">История оплаты PaySto</a></li>
+    </ul>
+    <div class="tab-content">
+      <div class="tab-pane active" id="tab1">
+
+
+        <div class="control-group">
+          <label class="control-label" for="inputCost">Стоимость:</label>
+          <div class="controls">
+            <div class="input-append">
+              <input type="number" id="inputCost" name="cost" value="{{order.cost}}"> <span class="add-on">.00 руб.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label class="control-label" for="inputDate">Дата заказа:</label>
+          <div class="controls">
+            <!--<input type="text" id="inputDate" name="date" value="{{order.dateL}}">-->
+            <span class="input-xlarge uneditable-input">{{order.dateL}}</span>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label class="control-label" for="inputTrack">Номер посылки</label>
+          <div class="controls">
+              <input type="text" id="inputTrack" name="tracking_number" value="{{order.tracking_number}}">
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label class="control-label" for="inputCommentBuyer">Примечание заказчика:</label>
+          <div class="controls">
+            <textarea id="inputCommentBuyer" name="comment_buyer" rows="3">{{order.comment_buyer}}</textarea>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label class="control-label" for="inputCommentSeller">Мое примечание:</label>
+          <div class="controls">
+            <textarea id="inputCommentSeller" name="comment_seller" rows="3">{{order.comment_seller}}</textarea>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label class="control-label" for="inputStatus">Статус:</label>
+          <div class="controls">
+            <span class="uneditable-input">{{order.status}}</span>
+          </div>
+        </div>
+
+
+      </div>
+      <div class="tab-pane" id="tab2">
+        <table class="table table-bordered table-hover">
+          <!--<caption>...</caption>-->
+          <thead>
+            <tr>
+              <th></th>
+              <th>Товар</th>
+              <th>Количество</th>
+              <th>Стоимость</th>
+              <th>Действие</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#order.items}}
+            <tr class="order-item" data-id="{{_id}}">
+              <th class="order-checkbox"><input type="checkbox" value=""></th>
+              <th>{{name}}
+                <input type="hidden" name="items[{{index}}][name]" value="{{name}}" class="order-item-name">
+                <input type="hidden" name="items[{{index}}][id]" value="{{id}}" class="order-item-id">
+                <input type="hidden" name="items[{{index}}][unit]" value="{{unit}}">
+                <input type="hidden" name="items[{{index}}][price]" value="{{price}}">
+                <input type="hidden" name="items[{{index}}][max_count]" value="{{max_count}}">
+                <!--<input type="hidden" name="items[{{index}}][_id]" value="{{_id}}">-->
+
+              </th>
+              <th class="order-count-row">
+                <input type="number" name="items[{{index}}][count]" value="{{count}}" min="0" max="10"  class="input-wide order-item-count">
+              </th>
+              <th class="order-cost-row">
+                <input type="number" name="items[{{index}}][cost]" value="{{cost}}" class="input-wide order-item-cost" min="0" max="100000" step="100">
+              </th>
+              <th class="order-action-row">
+                <a href="#" class="btn btn-mini btn-del-order-item">Удалить</a>
+              </th>
+            </tr>
+            {{/order.items}}
+          </tbody>
+        </table>
+
+
+      </div>
+      <div class="tab-pane" id="tab3">
+
+        <input type="hidden" name="buyer[session_id]" value="{{order.buyer.session_id}}">
+        <input type="hidden" name="buyer[ip]" value="{{order.buyer.ip}}">
+
+        <div class="control-group">
+
+          <label class="control-label" for="inputName">ФИО:</label>
+          <div class="controls">
+            <input type="text" id="inputName" name="buyer[name]" value="{{order.buyer.name}}">
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label class="control-label" for="inputEmail">Электронная почта:</label>
+          <div class="controls">
+            <input type="text" id="inputEmail" name="buyer[email]" value="{{order.buyer.email}}">
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label class="control-label" for="inputAddress">Адрес:</label>
+          <div class="controls">
+            <textarea id="inputAddress" name="buyer[address]" rows="3">{{order.buyer.address}}</textarea>
+          </div>
+        </div>
+
+      </div>
+      <div class="tab-pane" id="tab4">
+        <table class="table table-bordered table-hover">
+          <!--<caption>...</caption>-->
+          <thead>
+            <tr>
+              <th></th>
+              <th>Дата</th>
+              <th>Статус</th>
+              <th>Примечание</th>
+              <th>Действие</th>
+            </tr>
+          </thead>
+          <tbody class="status-body">
+            {{#order.statuses}}
+            <tr class="status-item" data-id="{{_id}}">
+              <th class="order-checkbox"><input type="checkbox" value=""></th>
+              <th class="status-date">
+                <span>{{dateL}}</span>
+                <input type="hidden" name="statuses[{{index}}][date]" value="{{dateISO}}" class="">
+              </th>
+              <th class="status-status input-inside">
+                <select form="editOrderForm" name="statuses[{{index}}][status]" style="width: 100%">
+                  <option {{#statusCreated}}selected{{/statusCreated}}>Создан</option>
+                  <option {{#statusPaid}}selected{{/statusPaid}}>Оплачен</option>
+                  <option {{#statusSent}}selected{{/statusSent}}>Отправлен</option>
+                  <option {{#statusClosed}}selected{{/statusClosed}}>Закрыт</option>
+                  <option {{#statusCanseled}}selected{{/statusCanseled}}>Отменен</option>
+                </select>
+
+              </th>
+              <th class="status-comment input-inside">
+                  <input type="text" name="statuses[{{index}}][comment]" value="{{comment}}" class="input-wide">
+              </th>
+              <th>
+                <a class="btn btn-mini status-del" href="#">Удалить</a>
+              </th>
+            </tr>
+            {{/order.statuses}}
+          </tbody>
+        </table>
+
+        <a class="btn add-status-btn">Добавить статус</a>
+
+      </div>
+
+      <div class="tab-pane" id="tab5">
+        <table class="table table-bordered table-hover">
+          <!--<caption>...</caption>-->
+          <thead>
+            <tr>
+              <th>Дата</th>
+              <th>IP</th>
+              <th>Статус</th>
+              <th>Проверка</th>
+              <th>Текст</th>
+            </tr>
+          </thead>
+          <tbody class="">
+            {{#order.paysto}}
+            <tr class="" data-id="{{_id}}">
+              <th>
+                <span>{{dateL}}</span>
+                <input type="hidden" name="paysto[{{index}}][date]" value="{{dateISO}}">
+              </th>
+              <th>
+                <span>{{ip}}</span>
+                <input type="hidden" name="paysto[{{index}}][ip]" value="{{ip}}">
+              </th>
+              <th>
+                <span>{{status}}</span>
+                <input type="hidden" name="paysto[{{index}}][status]" value="{{status}}">
+              </th>
+              <th>
+                <span>{{correctMD5YN}}</span>
+                <input type="hidden" name="paysto[{{index}}][correctMD5]" value="{{correctMD5}}">
+              </th>
+              <th>
+                <span>{{objJSON}}</span>
+                <input type="hidden" name="paysto[{{index}}][objJSON]" value="{{objJSON}}">
+              </th>
+            </tr>
+            {{/order.paysto}}
+          </tbody>
+        </table>
+      </div> <!--tab5-->
+
+    </div> <!--tab-content-->
+  </div> <!--tabable-->
+
+
+
+
+</form>
+
+<script id="status-template" type="text/template">
+  <tr class="status-item">
+    <th class="order-checkbox"><input type="checkbox" value=""></th>
+    <th class="status-date">
+      <span></span>
+      <input type="hidden" name="statuses[][date]" value="" class="">
+    </th>
+    <th class="status-status input-inside">
+      <select form="editOrderForm" name="statuses[{{index}}][status]" style="width: 100%">
+        <option>Создан</option>
+        <option>Оплачен</option>
+        <option selected>Отправлен</option>
+        <option>Закрыт</option>
+        <option>Отменен</option>
+      </select>
+
+    </th>
+    <th class="status-comment input-inside">
+        <input type="text" name="statuses[][comment]" value="" class="input-wide">
+    </th>
+    <th>
+      <a class="btn btn-mini status-del" href="#">Удалить</a>
+    </th>
+  </tr>
+</script>

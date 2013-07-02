@@ -1,47 +1,56 @@
-<div class="main-cart side-cart well sidebar-nav" {{#getting_order}}style="display: none"{{/getting_order}}>
-  <div class="nav-header cart-header">
-  	У вас в корзине:
-	</div>
-  <div class="full-cart {{cart.fullcartclass}}">
-    <table class="table table-condensed cart" style="font-size:12px">
-  		<thead>
-  			<tr>
-  				<th>
-  				</th>
-  				<th class="hidden-tablet">
-  				</th>
-  				<th>
-  				</th>
-  				<th style="width: 8px">
-  				</th>
-  			</tr>
-  		</thead>
-  		<tbody class="cart-body">
-      {{#def_cart}}
+<div class="cart" {{#getting_order}}style="display: none"{{/getting_order}}>
+  <h4>
+  	Корзина
+  </h4>
+  <div class="main-cart side-cart well sidebar-nav">
+   <!-- <div class="nav-header cart-header">-->
+   <!-- 	У вас в корзине:-->
+  	<!--</div>-->
+    <div class="full-cart {{cart.fullcartclass}}">
+      <table class="table table-condensed cart" style="font-size:12px">
+    		<thead>
+    			<tr>
+    				<th>
+    				</th>
+    				<th class="hidden-tablet">
+    				</th>
+    				<th>
+    				</th>
+    				<th style="width: 8px">
+    				</th>
+    			</tr>
+    		</thead>
+    		<tbody class="cart-body">
+        {{#def_cart}}
 
-      <tr class="ci-{{id}}">
-        <td><a href="/catalog/{{id}}">{{name}}</a></td>
-        <td class="hidden-tablet">  {{count}} {{unit}}</td>
-        <td> {{cost}} руб.</td>
-        <td><a class=close href="#">&times;</a></td>
-      </tr>
+        <tr class="ci-{{id}}">
+          <td><a href="/catalog/{{id}}">{{name}}</a></td>
+          <td class="hidden-tablet text-count">  {{count}} {{unit}}</td>
+          <td> {{cost}} руб.</td>
+          <td><a class=close href="#">&times;</a></td>
+        </tr>
 
-      {{/def_cart}}
-      <tr class="cart-delivery"><td>Доставка Почтой РФ</td><td class="hidden-tablet"></td><td> {{setting.deliveryPrice}} {{setting.currencyName}}</td><td></td></tr>
-  		</tbody>
-  	</table>
-  	<hr>
-  	<div class="cart-total-text" style="text-align: center;">
-  		Общая сумма
-  		<span class="cart-total-number">{{cart.total}}</span>
-  		руб.
-  	</div>
-  	<a class="btn btn-success btn-block" href="/order">
-  		Оформить заказ
-  	</a>
-  </div> <!--/.full-cart-->
-  <div class="empty-cart {{cart.emptycartclass}}">
-    <p>Пусто</p>
+        {{/def_cart}}
+        <tr class="cart-delivery"><td>Доставка Почтой РФ</td><td class="hidden-tablet"></td><td> {{setting.deliveryPrice}} {{setting.currencyName}}</td><td></td></tr>
+    		</tbody>
+    	</table>
+    	<hr>
+    	<div class="cart-total-text" style="text-align: center;">
+    		Общая сумма
+    		<span class="cart-total-number">{{cart.total}}</span>
+    		руб.
+    	</div>
+    	<a class="btn btn-success btn-block" href="/order">
+    		Оформить заказ
+    	</a>
+    </div> <!--/.full-cart-->
+    <div class="empty-cart {{cart.emptycartclass}}">
+      <p>Пуста</p>
+
+      <a class="btn btn-success btn-block" href="/order" disabled>
+    		Оформить заказ
+    	</a>
+    </div>
   </div>
-</div>
-<!--/.well -->
+  <!--/.well -->
+</div> <!--cart-->

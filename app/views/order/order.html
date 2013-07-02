@@ -3,8 +3,8 @@
 	Оформление заказа
 </h1>
 <p>
-	Это ваш заказ. Если все верно, то заполните поля ФИО, e-mail, телефон
-	и адрес доставки. Адрес пишите разборчивыми буквами и не забудьте индекс!
+	Это ваш заказ. Если все верно, то заполните поля ФИО, адрес доставки и e-mail.
+  Не ошибитесь при вводе e-mail, на этот почтовый ящик будет приходить вся информация по заказу!
 </p>
 <!--<div class="well">-->
 <!-- <div class="nav-header cart-header">
@@ -33,7 +33,7 @@
   				<span class="hidden-phone">Количество</span>
   			</th>
   			<th id="td_3">
-  				Цена
+  				Стоимость
   			</th>
   			<th id="td_4">
   			</th>
@@ -63,7 +63,8 @@
 </div>
 <div class="empty-cart {{cart.emptycartclass}}">
   <h2>Корзина пуста</h2>
-  <p><span class="label label-important">Что-то не то!</span> В вашей корзине отсутствуют товары. Вернитесь в каталог и выберете то, что вам понравится.</p>
+  <p><span class="label label-important">Что-то не то!</span> В вашей корзине отсутствуют товары. </p>
+  <p>Вернитесь в каталог и наполните корзину.</p>
 </div>
 <!--</div>-->
 <h2>
@@ -75,6 +76,7 @@
         <label class="control-label" for="name">ФИО получателя: <em>*</em></label>
 			  <div class="controls">
 					<input name="name" type="text" value="{{delivery.name}}" placeholder="Иванов Иван Иванович" required maxlength="100">
+          <p class="help-block"></p>
 				</div>
 			</div>
 
@@ -82,13 +84,17 @@
         <label class="control-label" for="address">Адрес: <em>*</em></label>
 				<div class="controls">
 					<textarea rows="3" cols="" name="address" placeholder="Московская область, Москва, ул. Шаболовка, д.37, кв. 45" required  maxlength="200">{{delivery.address}}</textarea>
+          <p class="help-block"></p>
 				</div>
 			</div>
 
       <div id=zip class="control-group">
         <label class="control-label" for="zip">Почтовый индекс: <em>*</em></label>
 				<div class="controls">
-					<input name="zip" type="text" value="{{delivery.zip}}" placeholder="115162" required pattern="[0-9]{6}" title="Почтовый индекс - 6 цифр">
+					<input name="zip" type="text" value="{{delivery.zip}}" placeholder="115162" required pattern="[0-9]{6}" title="Почтовый индекс - 6 цифр"
+            data-validation-pattern-message= "Почтовый индекс - 6 цифр!"
+          >
+          <p class="help-block"></p>
 				</div>
 			</div>
 
@@ -96,13 +102,22 @@
         <label class="control-label" for="baracuda"></label>
 	      <div class="controls">
           <input name="baracuda" type="text" value="">
+          <p class="help-block"></p>
 				</div>
 			</div>
 
       <div id=email class="control-group">
         <label class="control-label" for="email">E-mail: <em>*</em></label>
 				<div class="controls">
-					<input name="email" type="email" value="{{delivery.email}}" placeholder="ivanov@mail.ru" required>
+					<input
+            name="e-mail"
+            type="email"
+            value="{{delivery.email}}"
+            placeholder="ivanov@mail.ru"
+            required
+            data-validation-email-message= "Введите корректный e-mail адресс!"
+          >
+          <p class="help-block"></p>
 				</div>
 			</div>
 
@@ -113,18 +128,26 @@
 				</div>
 			</div>
 
+    	<div style="position: absolute; top: -100000px">
+				<input name="address1" class="address1" type=text>
+
+				<label>town	<input name="city" class="city" type=text> </label>
+
+				<input name="province" class="province" type=text>
+			</div>
+
 
   <h2>
   	Способ оплаты
   </h2>
   <div class="select-pay">
   	<label  class="radio">
-  		<input type="radio" name="payment" value="sb" checked>
-  		Наличкой на карточку Сбербанка
+  		<input type="radio" name="payment" value="sb">
+  		Через Сбербанк
   	</label>
   	<label  class="radio">
-  		<input type="radio" name="payment" value="gate">
-  		Электронной картой через платежный шлюз Interkass
+  		<input type="radio" name="payment" value="gate" checked>
+  		Через платежный шлюз PaySto (Visa, Mastercard, терминалы оплаты, с телефона и т.д.)
   	</label>
   </div>
   <br>
@@ -136,7 +159,7 @@
 	В чем же разница?
 </h3>
 <div class="media">
-  <a class="pull-left" href="#">
+  <a class="pull-left" href="/about/">
           <img class="media-object  img-polaroid" data-src="holder.js/64x64" alt="64x64" style="width: auto; height: auto;" src="/img/avatar.jpg">
       </a>
 	<div class="media-body">
@@ -145,21 +168,25 @@
 </h4>
           -->
 <p>
-  Если у вас есть банковская карточка, то, конечно же, лучше оплатить ей.
-	Нажав на кнопку «оплатить банковской карточкой», вы попадете на страницу
-	платежной системы «Assist». Это крупнейшая в России система приема электронных
-	платежей - надежная и безопасная. Тут вы введете необходимые данные своей
-	карточки и произведете оплату. Я увижу ваш платеж почти моментально в режиме
-	он-лайн. У нас в этом плане все очень хорошо организованно. И мы начнем
-	заниматься вашим заказом уже на следующий рабочий день.
+  Если у вас есть банковская карточка Visa, Mastercart, электронные деньги и т.д, то удобней проводить оплату,
+	выбрав «Через платежный шлюз PaySto». У вас сразу откроется страничка платежной системы «PaySto».
+  Это одна из крупнейших в России система приема электронных платежей. Тут вы введете необходимые данные и произведете оплату.
+  Практически мгновенно я увижу вашу оплату и сразу займусь заказом.
 </p>
 <p>
-	Если у вас нет карточки, то смело нажимайте «наличкой через банк». Это
-	тоже безотказный метод. Система автоматически и моментально сгенерирует
-	счет на оплату, и вышлет его на ваш электронный ящик. Красиво? А-то! Вам
-	нужно будет сходить в любое отделение любого банка и произвести оплату
-	по этому счету. Это просто.
+	Выбрав "Через Сбербанк", вам нужно будет дойти до близжайшего отделения Сбербанка и перевести мне деньги.
+  Довольно простая операция, вам понадобится только номер моей карты. Кстати, если у вас подключен "Сбербанк Онл@йн" вы можете провести оплату через банк-клиент - это еще быстрее.
 </p>
 	</div>
 </div>
+
+<form id="paysto" name="pay" id="paysto" method="post" action="https://paysto.com/ru/pay">
+
+    <input type=hidden name="PAYSTO_SHOP_ID" value="">
+    <input type=hidden name="PAYSTO_SUM" value="">
+    <input type=hidden name="PAYSTO_INVOICE_ID" value="">
+    <input type=hidden name="PAYSTO_DESC" value="">
+    <input type=hidden name="PayerEMail" value="">
+
+</form>
 

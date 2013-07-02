@@ -12,7 +12,7 @@
 
   {{#product._id}}
   <a href="{{product.main_image}}" class="thumbnail" target="_blank" style="width: 120px;">
-    <img height="80" width="120" src="{{product.main_image}}" style="margin:0; padding:0">
+    <img height="80" width="120" src="{{product.main_image_small}}" style="margin:0; padding:0">
   </a>
   {{/product._id}}
 
@@ -48,7 +48,7 @@
 
   <!--<br>-->
 
-  <textarea id="text" name="description" rows="12" cols="50" style="width:530px" required placeholder="Введите описание товара">{{product.description}}</textarea>
+  <textarea id="text" name="description" required placeholder="Введите описание товара ...">{{product.description}}</textarea>
 
   <label>
     Количество:
@@ -85,13 +85,13 @@
       {{#product.images}}
       <tr class="image-item">
         <th style="margin:0; padding:0; width:54px;">
-          <a href="{{.}}" class="thumbnail" target="_blank">
-            <img height="28" width="42" src="{{.}}" style="margin:0; padding:0">
+          <a href="{{url}}" class="thumbnail" target="_blank">
+            <img height="28" width="42" src="{{url_mini}}" style="margin:0; padding:0">
           </a>
         </th>
 
         <th class="input-inside">
-          <input type="text" name="images[]" value="{{.}}" class="input-wide image-url" required>
+          <input type="text" name="images[{{index}}][url]" value="{{url}}" class="input-wide image-url" required>
         </th>
         <th class="th-action">
           <a class="btn btn-mini image-del" href="#">Удалить</a>
@@ -146,7 +146,7 @@
       </a>
     </th>
     <th class="input-inside">
-      <input type="text" name="images[]" value="" class="input-wide image-url"  placeholder="Введите ссылку на изображение" required>
+      <input type="text" name="images[][url]" value="" class="input-wide image-url"  placeholder="Введите ссылку на изображение" required>
     </th>
     <th class="th-action">
       <a class="btn btn-mini image-del" href="#">Удалить</a>

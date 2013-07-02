@@ -48,7 +48,7 @@ res.locals.title = "Teapot - Заказы"
     //   'adm.order.js'
     // ];
 
-    res.render('admin/order/read', {
+    res.render('admin/order/edit', {
       layout: 'admin/layouts/default'
       // ,
       // partials: {
@@ -75,7 +75,7 @@ exports.update = function(req, res){
 
 
 
-  var new_doc = Order.findByIdAndUpdate(id, req.body, function(err, saved) {
+  Order.findByIdAndUpdate(id, req.body, function(err, saved) {
 
     if( err || !saved ) {
       //console.log("Post not updated: "+err);
@@ -105,7 +105,7 @@ exports.list = function(req, res){
 
   res.locals.bc_active = "Заказы";
 
-  Order.find().exec(function (err, docs) {
+  Order.find().sort("-date").exec(function (err, docs) {
 
     //console.log('order - was here');
 

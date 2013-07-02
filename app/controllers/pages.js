@@ -7,7 +7,17 @@ var nav = require('../../config/navbar')
 exports.show = function(req, res, next){
 
   res.locals.navbar = nav.getNavibar();
-  res.locals.active_about = true;
+
+  if (req.params.url === 'about') {
+    res.locals.active_about = true;
+  }
+  if (req.params.url === 'delivery') {
+    res.locals.active_delivery = true;
+  }
+  if (req.params.url === 'payments') {
+    res.locals.active_payments = true;
+  }
+
 
   res.locals.bc_list = [{
         name: "Главная страница",
