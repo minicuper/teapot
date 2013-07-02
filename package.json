@@ -13,7 +13,6 @@
     }
   , "dependencies": {
       "express": "latest"
-    , "jade": "latest"
     , "hogan-express": "latest"
     , "mongoose": "latest"
     , "mongoose-text-search": "latest"
