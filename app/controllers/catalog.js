@@ -113,7 +113,8 @@ exports.index_cat = function(req, res, next){
         if (doc === null) return callback(true);
 
         cat_id = doc._id;
-        cat = doc;
+        res.locals.bc_active = doc.name;
+        res.locals.category = doc;
         //console.log(cat_id);
         callback();
 
@@ -135,33 +136,9 @@ exports.index_cat = function(req, res, next){
     } else {
 
     }
-    res.locals.bc_active = cat.name;
+
     res.render('catalog/index');
   });
-
-      //console.log(docs);
-      // prod = new Product({
-      //   "title":"Чайник 'Джуни' 110 мл.",
-      //   "main_image": "https://lh5.googleusercontent.com/-JNzrPc9wNMI/T4_eqRjYZCI/AAAAAAAABRw/_TJnaEMPSEk/s800/4.jpg",
-      //   "description": "<p>Чайники из исинской глины – это глубочайшая тема. Она намного глубже, чем может показаться на первый взгляд. Возможно, непосвященный пользователь улыбнется этому. Но на самом деле в производстве исинских чайников в Китае заняты миллионы людей. Я не оговорился. Тут это и ремесло, и древняя традиция, и вид искусства одновременно.</p>",
-      //   "active": true,
-      //   "count": 1,
-      //   "price": 5600,
-      //   "unit": "шт.",
-      //   "category": doc._id,
-      //   "images":
-      //   [
-      //   	"https://lh4.googleusercontent.com/-u8yfqMzvRac/T5ZptchAjXI/AAAAAAAABS0/rYc7XqXw_tI/s800/3.jpg",
-      //   	"https://lh6.googleusercontent.com/-PIgk2t0Bqg0/T4_ep7Fvo5I/AAAAAAAABRs/CwwH7PQaS6k/s800/3.jpg"
-      //   ],
-
-      //   "refs":
-      //   [
-      //   	{name:"Бегство от суеты", url: "http://anastazia2008.livejournal.com/95215.html"},
-      //   	{name:"Чай без никого", url: "http://anastazia2008.livejournal.com/94868.html"}
-      //   ]
-      // });
-      // prod.save();
 
 
 

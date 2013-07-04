@@ -44,11 +44,13 @@
         <label class="checkbox">
           <input type='hidden' value="false" name='active'>
           <input type="checkbox" name="active" value="true" {{#category.active}}checked{{/category.active}}>
-          Категория активна
+          Показывать товары данной категории в магазине
         </label>
 
       </div>
     </div>
+
+    <textarea id="text" name="description" placeholder="Введите описание категории ...">{{category.description}}</textarea>
 
   </div>
 

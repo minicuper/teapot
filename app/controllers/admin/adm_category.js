@@ -36,13 +36,16 @@ exports.new = function(req, res){
 
   res.locals.sidebar = {categoryclass: "active"};
 
+  res.locals.css = [
+    'bootstrap-wysihtml5.css'
+  ];
 
-
-  // res.locals.scripts = [
-  //   'moment/moment.js',
-  //   'moment/lang/ru.js',
-  //   'adm.order.status.js'
-  // ];
+  res.locals.scripts = [
+    '/js/lib/wysihtml5/wysihtml5-0.4.0pre.min.js',
+    '/js/lib/wysihtml5/bootstrap-wysihtml5.js',
+    '/js/lib/wysihtml5/bootstrap-wysihtml5.ru-RU.js',
+    '/js/adm/adm.category.edit.js'
+  ];
 
 
   res.locals.bc_active = 'Новая категория';
@@ -81,12 +84,17 @@ exports.edit = function(req, res){
   res.locals.sidebar = {categoryclass: "active"};
 
 
+  res.locals.css = [
+    'bootstrap-wysihtml5.css'
+  ];
 
-  // res.locals.scripts = [
-  //   'moment/moment.js',
-  //   'moment/lang/ru.js',
-  //   'adm.order.status.js'
-  // ];
+  res.locals.scripts = [
+    '/js/lib/wysihtml5/wysihtml5-0.4.0pre.min.js',
+    '/js/lib/wysihtml5/bootstrap-wysihtml5.js',
+    '/js/lib/wysihtml5/bootstrap-wysihtml5.ru-RU.js',
+    '/js/adm/adm.category.edit.js'
+  ];
+
 
   Category.findById(req.params.id).exec(function (err, docs) {
 

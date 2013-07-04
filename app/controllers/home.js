@@ -17,9 +17,7 @@ var mongoose = require('mongoose')
 
 
 exports.index = function(req, res){
-  res.locals.title = "Teapot - Чайные штуки для китайской чайной церемонии"
-
-
+  res.locals.title = "Teapots - магазин чайников и чайных штук"
 
   if (req.session.logged) {
     //console.log('Welcome back!');
@@ -58,38 +56,6 @@ exports.index = function(req, res){
     res.render('home/index');
   });
 
-
-
-
 };
 
 
-exports.get_test = function(req, res){
-  res.locals.title = "Teapot - Test"
-
-
-
-  if (req.session.logged) {
-    //console.log('Welcome back!');
-  }
-  else {
-    req.session.logged = true;
-    //console.log('Welcome!');
-  }
-
-  res.locals.navbar = nav.getNavibar();
-
-  res.locals.bc_active = "Главная страница";
-
-
-
-
-
-};
-
-exports.post_test = function(req, res){
-  //console.log(req.body);
-
-  res.redirect('/');
-
-};

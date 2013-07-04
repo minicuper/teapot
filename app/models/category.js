@@ -27,11 +27,16 @@ var CategorySchema = new Schema({
   order: Number,
   url: {type : String, default : '', trim : true},
   active: Boolean,
-  createAt  : {type : Date, default : Date.now}
+  createAt  : {type : Date, default : Date.now},
+  description: {type : String, default : '', trim : true},
+  meta: {
+    description: {type : String, default : '', trim : true},
+    keywords: {type : String, default : '', trim : true}
+  }
 })
 
 
-CategorySchema.virtual('activeYN').get(function() { 
+CategorySchema.virtual('activeYN').get(function() {
   if (this.active === true) {
     return 'Да';
   } else {
@@ -39,7 +44,7 @@ CategorySchema.virtual('activeYN').get(function() {
   }
 });
 
-CategorySchema.virtual('createAtISO').get(function() { 
+CategorySchema.virtual('createAtISO').get(function() {
   var date = new Date(this.createAt);
   return date.toISOString();
 });
@@ -52,7 +57,7 @@ CategorySchema.virtual('createAtISO').get(function() {
 /**
  * Methods
  */
- 
+
 
 
 /**
