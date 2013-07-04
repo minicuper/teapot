@@ -263,3 +263,7 @@ th.input-inside {
 .navbar-search .search-query {
   line-height: normal !important;
 }
+
+.payments-methods img {
+  margin: -1px;
+}
