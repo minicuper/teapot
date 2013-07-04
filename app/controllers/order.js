@@ -225,8 +225,8 @@ exports.makeOrder = function(req, res, next){
     }
     var prod, obj, del = [];
 
-    console.log('products: ', docs);
-    console.log('cart: ', cart);
+    //console.log('products: ', docs);
+    //console.log('cart: ', cart);
 
     _.each(cart, function(doc){
       _.each(docs, function(p){
@@ -255,8 +255,8 @@ exports.makeOrder = function(req, res, next){
         del.push(cart.indexOf(doc));
         //TODO удалить товар из корзины
       } else if (doc.count !== old_count) {
-        console.log('doc.count: ', doc.count, typeof doc.count);
-        console.log('old_count: ', old_count, typeof old_count);
+        //console.log('doc.count: ', doc.count, typeof doc.count);
+        //console.log('old_count: ', old_count, typeof old_count);
 
         addInfo('Количество товара "'+doc.name+'" приведено в соответствие с остатками!');
       }

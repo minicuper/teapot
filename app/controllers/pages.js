@@ -25,7 +25,7 @@ exports.show = function(req, res, next){
       }];
 
   Page.findOne({url: req.params.url, active: true}).exec(function (err, doc) {
-    console.log('main page: ',doc);
+    //console.log('main page: ',doc);
     if (doc === null) {
       return next(new Error('Page not found!'));
     }

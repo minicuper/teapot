@@ -34,7 +34,7 @@ exports.index = function(req, res){
   async.parallel([
     function (cb){
       News.find({active: true}).sort('-date').limit(5).exec(function (err, docs) {
-        console.log('news', docs);
+        //console.log('news', docs);
 
         res.locals.shownews = (docs.length !== 0);
 

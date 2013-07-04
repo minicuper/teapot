@@ -97,7 +97,7 @@ module.exports = function (app, config, passport) {
     app.use(cart.getCart);
 
     app.use(function(req, res, next){
-      console.log('session: ', req.sessionID);
+      //console.log('session: ', req.sessionID);
       next();
     });
 

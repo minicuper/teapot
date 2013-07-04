@@ -88,7 +88,9 @@ exports.index_cat = function(req, res, next){
     ;
     res.locals.navbar = navbar;
 
-    //console.log(url_name);
+
+    //console.log(navbar, url);
+
     res.locals.active_catalog = true;
 
     res.locals.bc_list = [
@@ -130,7 +132,7 @@ exports.index_cat = function(req, res, next){
     }
   ], function(err){
     if (err) {
-      console.log('error in db - products', err);
+      //console.log('error in db - products', err);
       return next(new Error('Page not found!'));
 
     } else {

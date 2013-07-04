@@ -12,10 +12,11 @@ exports.init = function(){
   });
 }
 
-exports.getNavibar = function(locals, active){
+exports.getNavibar = function(active){
   var result = [];
 
   _.each(navbar, function(nav){
+    //console.log(active, nav.url);
     result.push({name: nav.name, url: nav.url, active: (nav.url === active)});
   });
 

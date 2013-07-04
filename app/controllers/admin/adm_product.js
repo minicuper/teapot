@@ -107,7 +107,7 @@ exports.new = function(req, res){
 
   Category.find().exec(function (err, docs) {
 
-    console.log('category - was here');
+    //console.log('category - was here');
 
     res.locals.categories = docs;
 

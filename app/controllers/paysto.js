@@ -348,7 +348,7 @@ var obj = req.body, correctMD5, ip, condition;
     }
     doc = docs[0];
 
-    console.log(doc);
+    //console.log(doc);
 
     if (doc.paysto.length === 0) {
       console.log('Отстутствуют статусы у заказа!');

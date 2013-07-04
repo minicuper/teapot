@@ -218,6 +218,8 @@ TD.td_4{text-align: center; padding:3px 0 3px 0;}
   background-image: url(../img/glyphicons-halflings-white.png);
   opacity: 1;
 }
+
+
 .bs-docs-sidenav.affix {
   top: 40px;
 }
