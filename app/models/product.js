@@ -91,7 +91,11 @@ var ProductSchema = new Schema({
   category: {type : Schema.ObjectId, ref : 'Category'},
   images: [ImageSchema],
   refs: [RefSchema],
-  date  : {type : Date, default : Date.now}
+  date  : {type : Date, default : Date.now},
+  meta: {
+    description: {type : String, default : '', trim : true},
+    keywords: {type : String, default : '', trim : true}
+  }
 });
 
 // give our schema text search capabilities

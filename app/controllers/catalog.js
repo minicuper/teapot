@@ -40,6 +40,12 @@ exports.show = function(req, res, next){
       if (doc.active === false || doc.count === 0){
         doc.disabled = true;
       }
+
+      res.locals.title = "Teapots - " + doc.name;
+      res.locals.description  = doc.meta.description;
+      res.locals.keywords     = doc.meta.keywords;
+
+
       res.locals.product = doc;
       res.locals.product_img_empty = (doc.images.length === 0);
       res.locals.product_ref_empty = (doc.refs.length === 0);
@@ -107,12 +113,12 @@ exports.index_cat = function(req, res, next){
     function(callback) {
       Category.findOne({"url": url}, function(err, doc){
 
-        //console.log('category - was here');
-        //console.log(url);
-        //console.log(doc);
-
         if (err) return callback(err);
         if (doc === null) return callback(true);
+
+        res.locals.title = "Teapots - " + doc.name;
+        res.locals.description  = doc.meta.description;
+        res.locals.keywords     = doc.meta.keywords;
 
         cat_id = doc._id;
         res.locals.bc_active = doc.name;
