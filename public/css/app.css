@@ -264,6 +264,7 @@ th.input-inside {
   line-height: normal !important;
 }
 
-.payments-methods img {
-  margin: -1px;
+.payments-methods img:nth-child(3n+2) {
+  margin-left: -1px;
+  margin-right: -1px;
 }
