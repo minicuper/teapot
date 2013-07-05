@@ -179,7 +179,8 @@ exports.postCheck = function (req, res, next){
 
   if (!checkMD5(obj, config.paysto.secret, true)) {
     console.log('Ошибка - некорректна подпись MD5!');
-    return res.send(200, 'Ошибка - некорректна подпись MD5!');
+    //TODO Включить возврат с ошибкой, когда врубять снова "Режим совместимости MD5"
+    //return res.send(200, 'Ошибка - некорректна подпись MD5!');
   }
 
   if (obj.PAYSTO_INVOICE_ID) {

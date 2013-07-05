@@ -18,6 +18,7 @@
   <table class="table table-condensed cart-order table-bordered" style="font-size:12px"
   cellpadding="0">
   	<colgroup>
+    <col id="c_0">
   		<col id="c_1">
   			<col id="c_2">
   				<col id="c_3">
@@ -25,6 +26,8 @@
   	</colgroup>
   	<thead>
   		<tr>
+        <th id="td_0">
+        </th>
   			<th id="td_1">
   				Товар
   			</th>
@@ -42,7 +45,12 @@
   	<tbody class="cart-body">
         {{#def_cart}}
         <tr class="ci-{{id}}">
-        <td class="name"><a href="/catalog/{{id}}">{{name}}</a></td>
+        <td style="margin:0; padding:0">
+          <a href="/catalog/{{id}}" class="thumbnail" target="_blank">
+            <img height="28" width="42" src="{{img}}" style="margin:0; padding:0">
+          </a>
+        </td>
+        <td class="name"><a href="/catalog/{{id}}" target="_blank">{{name}}</a></td>
         <!--<td>  {{count}} </td>-->
         <td class="input-inside count">
           <input type="Number" value="{{count}}" min="1" max="{{max_count}}" class="input-wide count-input" style="width: 100%">
@@ -51,7 +59,7 @@
         <td><a class=close href="#">&times;</a></td>
         </tr>
         {{/def_cart}}
-      <tr class="cart-delivery"><td>Доставка Почтой РФ</td><td class="hidden-tablet"></td><td> {{setting.deliveryPrice}} {{setting.currencyName}}</td><td></td></tr>
+      <tr class="cart-delivery"><td></td><td>Доставка Почтой РФ</td><td></td><td> {{setting.deliveryPrice}} {{setting.currencyName}}</td><td></td></tr>
   	</tbody>
   </table>
 
@@ -176,6 +184,9 @@
 <p>
 	Выбрав "Через Сбербанк", вам нужно будет дойти до близжайшего отделения Сбербанка и перевести мне деньги.
   Довольно простая операция, вам понадобится только номер моей карты. Кстати, если у вас подключен "Сбербанк Онл@йн" вы можете провести оплату через банк-клиент - это еще быстрее.
+</p>
+<p>
+  Мне конечно удобнее через Сбербанк - быстрее деньги попадают на карточку, но вам решать как вам удобнее.
 </p>
 	</div>
 </div>

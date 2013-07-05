@@ -199,18 +199,8 @@ var clear_cart = function(req, res){
 };
 
 
-
-exports.makeOrder = function(req, res, next){
-  //TODO
-  //Проверить складские запасы перед формированием заказа
-  var ids = []
-  //, cart = _.extend({}, req.session.cart_items);
-  , cart = req.session.cart_items;
-  ;
-  _.each(cart, function(doc){
-    ids.push(mongoose.Types.ObjectId(doc.id));
-  });
-
+//Проверим, что в корзине все ОК, на складе всего хватает, если нет - усекаем
+var checkCart = function (req, res, cart, docs){
   var addInfo = function(text) {
     if (!res.locals.info) {
       res.locals.info = [];
@@ -219,21 +209,20 @@ exports.makeOrder = function(req, res, next){
     res.locals.info.push(text);
   }
 
-  Product.find({_id:{$in: ids}}).exec(function(err, docs){
-    if (err) {
-      return next(new Error('Не найдены товары из корзины!'));
-    }
-    var prod, obj, del = [];
+  var prod, obj, del = [];
 
-    //console.log('products: ', docs);
-    //console.log('cart: ', cart);
 
-    _.each(cart, function(doc){
-      _.each(docs, function(p){
-        if (p._id.toString() === doc.id) {
-          prod = p;
-        }
-      }); //products
+  _.each(cart, function(doc){
+
+    prod = undefined;
+
+    _.each(docs, function(p){
+      if (p._id.toString() === doc.id) {
+        prod = p;
+      }
+    }); //products
+
+    if (prod !== undefined) {
 
       var old_count = doc.count;
 
@@ -250,26 +239,96 @@ exports.makeOrder = function(req, res, next){
 
       doc.cost = doc.count * doc.price;
 
-      if (doc.count === 0) {
-        addInfo('Товар "'+doc.name+'" закончился!');
-        del.push(cart.indexOf(doc));
-        //TODO удалить товар из корзины
-      } else if (doc.count !== old_count) {
-        //console.log('doc.count: ', doc.count, typeof doc.count);
-        //console.log('old_count: ', old_count, typeof old_count);
+      //Картинка
+      doc.img = prod.main_image_mini;
+      //console.log(doc.img);
 
-        addInfo('Количество товара "'+doc.name+'" приведено в соответствие с остатками!');
-      }
+    }
 
-    }); //cart
+    if (doc.count === 0 || prod === undefined) {
+      addInfo('Товар "'+doc.name+'" закончился!');
+      del.push(cart.indexOf(doc));
+      //TODO удалить товар из корзины
+    } else if (doc.count !== old_count) {
+      //console.log('doc.count: ', doc.count, typeof doc.count);
+      //console.log('old_count: ', old_count, typeof old_count);
 
-    del.sort(function(a,b){return b-a}); //desc
+      addInfo('Количество товара "'+doc.name+'" приведено в соответствие с остатками!');
+    }
 
-    _.each(del, function(index){
-      cart.splice(index, 1);
+  }); //cart
+
+  del.sort(function(a,b){return b-a}); //desc
+
+  _.each(del, function(index){
+    cart.splice(index, 1);
+  });
+
+  req.session.cart_items = [];
+
+  _.each(cart, function(obj){
+    req.session.cart_items.push({
+      id: obj.id,
+      count: obj.count,
+      cost: obj.cost,
+      name: obj.name,
+      price: obj.price,
+      unit: obj.unit,
+      max_count: obj.max_count
     });
+  });
 
-    midCart.getCart(req, res);
+  if (req.session.cart_items) {
+    res.locals.def_cart_JSON = JSON.stringify(req.session.cart_items);
+  } else {
+    res.locals.def_cart_JSON = "[]";
+    req.session.cart_items = [];
+  }
+  res.locals.def_cart = cart;
+  //console.log(cart);
+
+  var total = res.locals.setting.deliveryPrice;
+
+  _.each(req.session.cart_items, function(item){
+    total += item.cost;
+  });
+
+  if (req.session.cart_items.length === 0) {
+    res.locals.cart = {
+      fullcartclass: "hidden",
+      emptycartclass: "",
+      total: total
+    }
+  } else {
+    res.locals.cart = {
+      fullcartclass : "",
+      emptycartclass : "hidden",
+      total: total
+    }
+  }
+}
+
+exports.makeOrder = function(req, res, next){
+  //TODO
+  //Проверить складские запасы перед формированием заказа
+  var ids = []
+  , cart = _.extend([], req.session.cart_items);
+
+  //, cart = req.session.cart_items;
+  ;
+
+  //console.log(cart);
+
+  _.each(cart, function(doc){ids.push(mongoose.Types.ObjectId(doc.id));});
+
+  Product.find({_id:{$in: ids}}).exec(function(err, docs){
+    if (err) {
+      return next(new Error('Не найдены товары из корзины!'));
+    }
+
+    checkCart(req, res, cart, docs); // Корректируем состав корзины
+
+    //midCart.getCart(req, res);
 
     res.locals.navbar = nav.getNavibar();
 

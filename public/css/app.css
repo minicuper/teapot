@@ -114,6 +114,7 @@ body {
 }
 
 .cart-order { border-collapse: collapse; table-layout: fixed; width: 100%;}
+col#c_0 { width: 55px; }
 col#c_1 { width: 60%; }
 col#c_2 { width: 20%; }
 col#c_3 { width: 20%; }
