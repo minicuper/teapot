@@ -7,7 +7,7 @@ var async = require('async')
 
 exports.list = function(req, res){
 
-  res.locals.title = "Teapot - Товары"
+  res.locals.title = "Teapots - Товары"
 
   res.locals.bc_list = [{
     name: "Главная страница админки",
@@ -34,7 +34,7 @@ exports.list = function(req, res){
 
   async.parallel([
     function(cb){
-      Product.find(filter).populate('category').exec(function (err, docs) {
+      Product.find(filter).sort({category: 1, priority: -1, date: -1}).populate('category').exec(function (err, docs) {
 
         //console.log('product - was here');
 
@@ -46,7 +46,7 @@ exports.list = function(req, res){
 
     },
     function(cb){
-      Category.find().exec(function (err, docs) {
+      Category.find().sort({order: 1}).exec(function (err, docs) {
 
         //console.log('category - was here');
 
@@ -81,7 +81,7 @@ exports.list = function(req, res){
 }
 
 exports.new = function(req, res){
-  res.locals.title = "Teapot - Создание товара";
+  res.locals.title = "Teapots - Создание товара";
 
   res.locals.bc_list = [{
     name: "Главная страница админки",

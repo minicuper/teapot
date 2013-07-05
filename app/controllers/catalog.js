@@ -129,7 +129,7 @@ exports.index_cat = function(req, res, next){
       });
     },
     function(callback) {
-      Product.find({"category": cat_id, active: true, count:{$ne: 0}}).sort('-date').exec(function (err, docs) {
+      Product.find({"category": cat_id, active: true, count:{$ne: 0}}).sort({priority: -1, date: -1}).exec(function (err, docs) {
         //console.log('product - was here');
         if (err) return callback(err);
         res.locals.products = docs;

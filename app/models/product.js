@@ -86,6 +86,7 @@ var ProductSchema = new Schema({
   description: {type : String, default : '', trim : true},
   active: Boolean,
   count: {type: Number, default: 1},
+  priority: {type: Number, default: 0},
   price: Number,
   unit: {type : String, default : 'шт.', trim : true},
   category: {type : Schema.ObjectId, ref : 'Category'},

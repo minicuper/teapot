@@ -51,6 +51,11 @@
   <textarea id="text" name="description" placeholder="Введите описание товара ...">{{product.description}}</textarea>
 
   <label>
+    Приоритет:
+  </label>
+  <input type="number" name="priority" value="{{product.priority}}" min="0" max="10" step="1">
+
+  <label>
     Количество:
   </label>
   <input type="number" name="count" value="{{product.count}}" min="0" max="100000" step="1">
