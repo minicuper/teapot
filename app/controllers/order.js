@@ -433,7 +433,7 @@ exports.postOrder = function(req, res, next){
       }
 
       sendmail_to_buyer(order, 'Ваш заказ успешно сформирован!', 'gate_order_complite_buyer');
-      sendmail_to_seller(order, 'Новый заказ в интернет-магазине "TeaPot"', 'gate_order_complite_seller');
+      sendmail_to_seller(order, 'Новый заказ в интернет-магазине "TeaPots"', 'gate_order_complite_seller');
 
       change_stock(req.session.cart_items);
       clear_cart(req, res);
@@ -486,7 +486,7 @@ exports.postOrder = function(req, res, next){
       }
 
       sendmail_to_buyer(order, 'Ваш заказ успешно сформирован!', 'sb_order_complite_buyer');
-      sendmail_to_seller(order, 'Новый заказ в интернет-магазине "TeaPot"', 'sb_order_complite_seller');
+      sendmail_to_seller(order, 'Новый заказ в интернет-магазине "TeaPots"', 'sb_order_complite_seller');
 
       change_stock(req.session.cart_items);
       clear_cart(req, res);

@@ -3,7 +3,7 @@
 	<h2>
 		{{name}}{{#disabled}} <span class="label label-important">Не продается!</span>{{/disabled}}
 	</h2>
-	<img id="im-{{id}}" src="{{main_image_normal}}">
+	<img id="im-{{id}}" src="{{main_image_normal}}" alt="{{name}}">
 	<div>
 		<h3>
 			Описание
@@ -31,7 +31,7 @@
 		</h3>
     {{/product_img_empty}}
     {{#images}}
-		<img src="{{url_normal}}">
+		<img src="{{url_normal}}" alt="{{name}} (дополнительно)">
     <br/><br/>
 		{{/images}}
     {{^product_ref_empty}}
