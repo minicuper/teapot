@@ -114,13 +114,14 @@ body {
 }
 
 .cart-order { border-collapse: collapse; table-layout: fixed; width: 100%;}
-col#c_0 { width: 55px; }
+col#c_0 { width: 50px; }
 col#c_1 { width: 60%; }
 col#c_2 { width: 20%; }
 col#c_3 { width: 20%; }
 col#c_4 { width: 20px; }
 TD.td_2, TD.td_3{text-align: right;}
 TD.td_4{text-align: center; padding:3px 0 3px 0;}
+TD.td_0{text-align: center; vertical-align: middle;}
 
 
 
