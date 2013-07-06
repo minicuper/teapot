@@ -94,7 +94,7 @@ exports.delete = function(req, res){
 
 
 exports.list = function(req, res){
-  res.locals.title = "Teapot - Заказы"
+  res.locals.title = "Teapots - Заказы"
 
   res.locals.bc_list = [{
     name: "Главная страница админки",

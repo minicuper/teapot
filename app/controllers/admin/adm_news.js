@@ -110,7 +110,7 @@ exports.create = function(req, res){
 }
 
 exports.edit = function(req, res){
-    res.locals.title = "Teapot - Редактирование новости"
+    res.locals.title = "Teapots - Редактирование новости"
 
   res.locals.bc_list = [{
     name: "Главная страница админки",

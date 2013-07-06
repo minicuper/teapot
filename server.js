@@ -10,7 +10,7 @@
  */
 
 var express = require('express')
-  , fs = require(git 'fs')
+  , fs = require('fs')
   , passport = require('passport')
 
 ;
