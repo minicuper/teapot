@@ -8,7 +8,7 @@ var async = require('async')
 
 exports.edit = function(req, res, next){
 
-  res.locals.title = "Teapot - Создание страницы";
+  res.locals.title = "Teapots - Настройки";
 
   res.locals.bc_list = [{
     name: "Главная страница админки",

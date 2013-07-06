@@ -1,4 +1,4 @@
-  
+
 
 /**
  * Module dependencies.
@@ -12,10 +12,10 @@ var async = require('async')
 
 
 exports.index = function(req, res){
-  res.locals.title = "Teapot - Админка"
-    
+  res.locals.title = "Teapots - Админка"
+
   res.locals.bc_active = "Главная страница";
-  
+
   res.render('admin/layouts/main', {
     layout: 'admin/layouts/default'
     // ,

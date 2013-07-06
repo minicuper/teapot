@@ -139,7 +139,7 @@ exports.create = function(req, res){
 exports.edit = function(req, res, next){
   var categoryId;
 
-  res.locals.title = "Teapot - Редактирование товара";
+  res.locals.title = "Teapots - Редактирование товара";
 
   res.locals.bc_list = [{
     name: "Главная страница админки",

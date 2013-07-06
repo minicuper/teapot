@@ -24,7 +24,7 @@ exports.create = function(req, res){
 };
 
 exports.new = function(req, res){
-  res.locals.title = "Teapot - Создание категории"
+  res.locals.title = "Teapots - Создание категории"
 
   res.locals.bc_list = [{
     name: "Главная страница админки",
@@ -71,7 +71,7 @@ exports.new = function(req, res){
 };
 
 exports.edit = function(req, res){
-  res.locals.title = "Teapot - Редактирование категории"
+  res.locals.title = "Teapots - Редактирование категории"
 
   res.locals.bc_list = [{
     name: "Главная страница админки",

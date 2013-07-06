@@ -6,7 +6,7 @@ var async = require('async')
 
 exports.list = function(req, res){
 
-  res.locals.title = "Teapot - Новости"
+  res.locals.title = "Teapots - Новости"
 
   res.locals.bc_list = [{
     name: "Главная страница админки",
