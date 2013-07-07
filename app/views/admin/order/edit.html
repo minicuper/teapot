@@ -90,7 +90,7 @@
             {{#order.items}}
             <tr class="order-item" data-id="{{_id}}">
               <th class="order-checkbox"><input type="checkbox" value=""></th>
-              <th>{{name}}
+              <th><a href="/catalog/{{id}}" target="_blank">{{name}}</a>
                 <input type="hidden" name="items[{{index}}][name]" value="{{name}}" class="order-item-name">
                 <input type="hidden" name="items[{{index}}][id]" value="{{id}}" class="order-item-id">
                 <input type="hidden" name="items[{{index}}][unit]" value="{{unit}}">
