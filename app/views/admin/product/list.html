@@ -12,9 +12,11 @@
     <tr>
       <th></th>
       <th>Название</th>
-      <th>Количество</th>
+      <th>Колич.</th>
+      <th>Цена</th>
       <th>Категория</th>
-      <th>Виден в магазине</th>
+      <th>Виден</th>
+      <th>Приор.</th>
       <th>Действие</th>
       <!--<th>Создана</th>-->
     </tr>
@@ -22,6 +24,7 @@
   <tbody>
     <form id="filter-form" action="/admin/product">
     <tr class="table-filter">
+      <th></th>
       <th></th>
       <th></th>
       <th></th>
@@ -40,7 +43,8 @@
 
       </th>
       <th></th>
-      <th class="input-inside1"><button type="submit" form="filter-form" class="btn btn-mini">Фильтровать</button></th>
+      <th></th>
+      <th class="input-inside1"><button type="submit" form="filter-form" class="btn btn-mini btn-info">Фильтровать</button></th>
       <!--<th>{{createdAt}}</th>-->
     </tr>
     </form>
@@ -59,8 +63,10 @@
         </a>
       </th>
       <th>{{count}}</th>
+      <th>{{price}}</th>
       <th>{{category.name}}</th>
       <th>{{activeYN}}</th>
+      <th>{{priority}}</th>
       <th>
         <a href="/admin/product/{{_id}}/edit" class="btn btn-mini product-edit" data-id="{{_id}}">Изменить</a>
         <!--<a href="#">Просмотр</a>-->
