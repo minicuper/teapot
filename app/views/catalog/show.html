@@ -5,9 +5,10 @@
 	</h2>
 	<img id="im-{{id}}" src="{{main_image_normal}}" alt="{{name}}">
 	<div>
-		<h3>
-			Описание
-		</h3>
+		<!--<h5>-->
+		<!--	Описание-->
+		<!--</h5>-->
+    <br>
 
 		<div class="media">
 			<a class="pull-left" href="/about/">
@@ -26,18 +27,24 @@
 			</span>
 		</div>
     {{^product_img_empty}}
-		<h3>
-			Дополнительные фотографии:
-		</h3>
+		<!--<h5>-->
+		<!--	Еще фото:-->
+		<!--</h5>-->
+
+    <br>
+
     {{/product_img_empty}}
     {{#images}}
 		<img src="{{url_normal}}" alt="{{name}} (дополнительно)">
     <br/><br/>
 		{{/images}}
     {{^product_ref_empty}}
-		<h3>
-			Что почитать:
-		</h3>
+
+  <!--  <h5>-->
+		<!--	Что почитать:-->
+		<!--</h5>-->
+    <br>
+
     {{/product_ref_empty}}
 		<ul>
       {{#refs}}
