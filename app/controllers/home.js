@@ -25,7 +25,7 @@ exports.index = function(req, res){
     //console.log('Welcome back!');
   }
   else {
-    req.session.logged = true;mongo ds057867.mongolab.com:57867/teapot -u <dbuser> -p <dbpassword>
+    req.session.logged = true;
     //console.log('Welcome!');
   }
 
