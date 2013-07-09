@@ -10,12 +10,15 @@ exports.show = function(req, res, next){
 
   if (req.params.url === 'about') {
     res.locals.active_about = true;
+    res.locals.keywords = "teapots, информация, о магазине, Анастасия";
   }
   if (req.params.url === 'delivery') {
     res.locals.active_delivery = true;
+    res.locals.keywords = "teapots, доставка, условия, по России, за рубеж";
   }
   if (req.params.url === 'payments') {
     res.locals.active_payments = true;
+    res.locals.keywords = "teapots, оплата, Visa, mastercart, Сбербанк";
   }
 
 
@@ -33,6 +36,7 @@ exports.show = function(req, res, next){
     res.locals.topic = doc;
     //}
     res.locals.bc_active = doc.name;
+    res.locals.title = "Teapots - " + doc.name;
 
     res.render('pages/show');
   });
