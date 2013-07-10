@@ -12,7 +12,9 @@
 <h3>Кто купил:</h3>
 <p><b>ФИО</b>: {{buyer.name}}</p>
 <p><b>Адрес</b>: {{buyer.address}}</p>
-<p><b>e-mail</b>: {{buyer.email}}</p>
+<p><b>e-mail</b>: <a href="mailto:{{buyer.email}}">{{buyer.email}}</a></p>
+<br />
+<p><b>Примечание:</b>{{comment_buyer}}</p>
 
 <p><b>P.S.</b></p>
 <p>Жди оплаты и отсылай. Удачи!</p>
