@@ -1,16 +1,10 @@
 User-agent: Yandex
 Allow: /
 Disallow: /admin
-Disallow: /payments
-Disallow: /delivery
 Disallow: /paysto
-Disallow: /webmoney
 
 User-agent: *
 Allow: /
 Disallow: /admin
-Disallow: /payments
-Disallow: /delivery
 Disallow: /paysto
-Disallow: /webmoney
 Host: teapots.su
