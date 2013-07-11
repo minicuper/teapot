@@ -111,18 +111,11 @@ exports.new = function(req, res){
 
     res.locals.categories = docs;
 
-
     res.locals.bc_active = 'Создание продукта';
 
 
     res.render('admin/product/edit', {
       layout: 'admin/layouts/default'
-      // ,
-      // partials: {
-      //   adm_breadcrumb: 'admin/layouts/adm_breadcrumb',
-      //   adm_sidebar: 'admin/layouts/adm_sidebar',
-      //   adm_navbar: 'admin/layouts/adm_navbar',
-      // }
     });
 
   });

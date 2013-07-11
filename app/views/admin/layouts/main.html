@@ -37,3 +37,42 @@
     {{/orders}}
   </tbody>
 </table>
+
+<h3>Посещение сайта за неделю</h3>
+
+<div id="chart_div" style="width: 100%; height: 300px; border: #dddddd solid 1px; border-radius: 4px;"></div>
+
+<h3>Популярные товары (за 3 дня)</h3>
+
+<table class="table table-bordered table-hover _order-list">
+  <!--<caption>...</caption>-->
+  <thead>
+    <tr>
+      <th></th>
+      <th></th>
+      <th>Товар</th>
+      <th>Просмотров</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#table}}
+    <tr class="order-item" data-id="{{_id}}">
+      <th class="order-checkbox"><input type="checkbox" value=""></th>
+      <th style="margin:0; padding:0; width: 50px;">
+        <img height="28" width="42" src="{{img}}" style="margin:0; padding:4px 4px 2px 4px;">
+      </th>
+      <th>
+        <a href="{{url}}" target="_blank">
+          {{name}}
+        </a>
+      </th>
+      <th>{{views}}</th>
+    </tr>
+    {{/table}}
+  </tbody>
+</table>
+
+<script type="text/javascript">
+  gdata = {{{data}}};
+  //gtable = {{{table}}};
+</script>
