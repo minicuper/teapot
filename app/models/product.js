@@ -149,6 +149,21 @@ ProductSchema.virtual('activeYN').get(function() {
   }
 });
 
+
+
+ProductSchema.virtual('isNew').get(function() {
+  var addDayDate = function(date, days) {
+    var result = new Date(date);
+    result.setDate(date.getDate()+days);
+    return result;
+  };
+
+  var weekAgo = addDayDate(new Date(), -7);
+
+  return this.date > weekAgo;
+
+});
+
 ProductSchema.virtual('formattedDescription').get(function() {
   var res = '', ar = this.description.split(/\r\n/);
   _.each(ar, function(val){

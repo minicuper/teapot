@@ -1,7 +1,9 @@
 {{#product}}
 <div  id="it-{{id}}">
 	<h2>
-		{{name}}{{#disabled}} <span class="label label-important">Не продается!</span>{{/disabled}}
+		{{name}}
+    {{#disabled}} <span class="label label-important">Не продается!</span>{{/disabled}}
+    {{#isNew}} <span class="label label-warning" title="Товар в магазине меньше одной недели">Новинка!</span>{{/isNew}}
 	</h2>
 	<img id="im-{{id}}" src="{{main_image_normal}}" alt="{{name}}">
 	<div>

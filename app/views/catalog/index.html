@@ -10,7 +10,9 @@
 <div id="it-{{id}}">
   <h3>
 		{{name}}
+    {{#isNew}} <span class="label label-warning" title="Товар в магазине меньше одной недели">Новинка!</span>{{/isNew}}
 	</h3>
+
 	<a href="/catalog/{{_id}}"><img id="im-{{id}}" src="{{main_image_normal}}" alt="{{name}}"></a>
 	<br>
 	<br>
