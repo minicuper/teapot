@@ -168,7 +168,7 @@ exports.list = function(req, res){
 
   res.locals.bc_active = "Категории";
 
-  Category.find().sort('order').exec(function (err, docs) {
+  Category.getAll(function (err, docs) {
 
     //console.log('order - was here');
 

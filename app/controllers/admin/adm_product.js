@@ -34,9 +34,7 @@ exports.list = function(req, res){
 
   async.parallel([
     function(cb){
-      Product.find(filter).sort({category: 1, priority: -1, date: -1}).populate('category').exec(function (err, docs) {
-
-        //console.log('product - was here');
+      Product.getSortedProductsWithFilter(filter, function (err, docs) {
 
         res.locals.products = docs;
 
@@ -46,7 +44,7 @@ exports.list = function(req, res){
 
     },
     function(cb){
-      Category.find().sort({order: 1}).exec(function (err, docs) {
+      Category.getAll(function (err, docs) {
 
         //console.log('category - was here');
 
@@ -105,7 +103,7 @@ exports.new = function(req, res){
     '/js/adm/adm.product.edit.js'
   ];
 
-  Category.find().exec(function (err, docs) {
+  Category.getAll(function (err, docs) {
 
     //console.log('category - was here');
 
@@ -174,7 +172,7 @@ exports.edit = function(req, res, next){
 
     },
     function(cb){
-      Category.find().exec(function (err, docs) {
+      Category.getAll(function (err, docs) {
 
         //console.log('category - was here');
 

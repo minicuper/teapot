@@ -25,7 +25,7 @@ exports.edit = function(req, res, next){
       return next(new Error('Page not found!'));
     }
 
-    req.flash('success', 'Настройки сохранены.');
+    //req.flash('success', 'Настройки сохранены.');
 
     res.locals.setting = doc;
 

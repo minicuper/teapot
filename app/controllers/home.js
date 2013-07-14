@@ -17,6 +17,8 @@ var mongoose = require('mongoose')
 
 
 exports.index = function(req, res){
+  var monthAgo;
+
   res.locals.title = "Teapots - магазин чайников и чайных штук"
   res.locals.description = "Интернет-магазин чайников и чайной утвари. Китайские чайники из иссинской глины, тайваньские чашки, фигурки для чайной церемонии, чайные доски.";
   res.locals.keywords = "чайники, чайная утварь, фигурки, чашки, чайная церемония";
@@ -33,9 +35,17 @@ exports.index = function(req, res){
 
   res.locals.bc_active = "Главная страница";
 
+  var addMonthToDate = function(date, monthes) {
+    var result = new Date(date);
+    result.setMonth(date.getMonth()+monthes);
+    return result;
+  };
+
+  monthAgo = addMonthToDate(new Date(), -1);
+
   async.parallel([
     function (cb){
-      News.find({active: true}).sort('-date').limit(5).exec(function (err, docs) {
+      News.getNews(1, function (err, docs) {
         //console.log('news', docs);
 
         res.locals.shownews = (docs.length !== 0);
@@ -45,9 +55,10 @@ exports.index = function(req, res){
       });
     },
     function (cb){
-      Page.findOne({url: 'main'}).exec(function (err, docs) {
+      Page.getMainPage(function (err, docs) {
         //console.log('main page: ',docs);
         //if (docs !== null && docs.length > 0) {
+        //console.log('error in main page: ', err);
           res.locals.maintopic = docs;
         //}
         cb(err);

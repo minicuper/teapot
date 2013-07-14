@@ -32,16 +32,11 @@ exports.index = function(req, res, next){
   //console.log('flash query', res.locals.query);
   //console.log(req.query);
 
-  var options = {
-    filter: { active: true, count: {$ne: 0} },
-    language: 'russian',
-    limit: 10
-  };
+
 
   //console.log(Product);
 
-  Product.textSearch(query, options, function(err, output){
-    var results = [];
+  Product.findFullText(query, function(err, results){
 
     if (err) {
       //console.log('error in find: ', err);
@@ -49,10 +44,6 @@ exports.index = function(req, res, next){
     }
 
     //req.flash('query', query);
-
-    _.each(output.results, function(obj){
-      results.push(obj.obj);
-    });
 
     res.locals.results = results;
 

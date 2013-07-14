@@ -64,4 +64,13 @@ CategorySchema.virtual('createAtISO').get(function() {
  * Statics
  */
 
+CategorySchema.statics.findByUrl = function(url, cb) {
+  this.findOne({url: url}).exec(cb);
+};
+
+CategorySchema.statics.getAll = function(cb) {
+  this.find().sort('order').exec(cb);
+};
+
+
 mongoose.model('Category', CategorySchema)

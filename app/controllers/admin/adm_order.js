@@ -93,7 +93,7 @@ exports.delete = function(req, res){
 };
 
 
-exports.list = function(req, res){
+exports.list = function(req, res, next){
   res.locals.title = "Teapots - Заказы"
 
   res.locals.bc_list = [{
@@ -105,11 +105,11 @@ exports.list = function(req, res){
 
   res.locals.bc_active = "Заказы";
 
-  Order.find().sort("-date").exec(function (err, docs) {
+  Order.getAllOrdersSort(function (err, docs) {
 
     //console.log('order - was here');
 
-    if (err) return err;
+    if (err) return next(err);
 
     res.locals.orders = docs;
 

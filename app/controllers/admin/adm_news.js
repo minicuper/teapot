@@ -17,7 +17,7 @@ exports.list = function(req, res){
 
   res.locals.bc_active = "Новости";
 
-  News.find().sort('-date').exec(function (err, docs) {
+  News.getAllNews(function (err, docs) {
 
     //console.log('news - was here');
 

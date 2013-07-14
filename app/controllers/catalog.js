@@ -111,7 +111,7 @@ exports.index_cat = function(req, res, next){
 
   async.series([
     function(callback) {
-      Category.findOne({"url": url}, function(err, doc){
+      Category.findByUrl(url, function(err, doc){
 
         if (err) return callback(err);
         if (doc === null) return callback(true);
@@ -129,7 +129,7 @@ exports.index_cat = function(req, res, next){
       });
     },
     function(callback) {
-      Product.find({"category": cat_id, active: true, count:{$ne: 0}}).sort({priority: -1, date: -1}).exec(function (err, docs) {
+      Product.getAvailableProducts(cat_id, function (err, docs) {
         //console.log('product - was here');
         if (err) return callback(err);
         res.locals.products = docs;

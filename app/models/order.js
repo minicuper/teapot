@@ -220,16 +220,35 @@ OrderSchema
  * Statics
  */
 
-OrderSchema.statics = {
+OrderSchema.statics.findByIdOrBySessionId = function(id, session_id, cb){
+  var condition;
 
+  if (id) {
+    condition = {"_id": id};
+  } else {
+    condition = {"buyer.session_id": session_id};
+  }
 
-  load: function (id, cb) {
-    this.findOne({ _id : id })
-      .populate('items.id')
-      //.populate('comments.user')
-      .exec(cb)
-  },
+  this.find(condition).sort("-data").limit(1).exec(cb);
+};
 
+OrderSchema.statics.getLastDaysOrders = function(num, cb){
+  var date;
+
+  var addDaysToDate = function(date, days) {
+    var result = new Date(date);
+
+    result.setDate(date.getDate() + days);
+    return result;
+  };
+
+  date = addDaysToDate(new Date(), -num);
+
+  this.find({date: {$gt: date}}).sort("-date").exec(cb);
+}
+
+OrderSchema.statics.getAllOrdersSort = function(cb){
+  this.find().sort('-date').exec(cb);
 }
 
 mongoose.model('Order', OrderSchema)

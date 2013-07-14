@@ -8,7 +8,7 @@ var mongoose = require('mongoose')
   , env = process.env.NODE_ENV || 'development'
   , config = require('../../config/config')[env]
   //, imagerConfig = require(config.root + '/config/imager.js')
-  , moment = require('moment')  
+  , moment = require('moment')
   , Schema = mongoose.Schema
   , _ = require('underscore')
 
@@ -33,7 +33,7 @@ var PageSchema = new Schema({
 })
 
 
-PageSchema.virtual('activeYN').get(function() { 
+PageSchema.virtual('activeYN').get(function() {
   if (this.active === true) {
     return 'Да';
   } else {
@@ -41,24 +41,24 @@ PageSchema.virtual('activeYN').get(function() {
   }
 });
 
-PageSchema.virtual('dateISO').get(function() { 
+PageSchema.virtual('dateISO').get(function() {
   var date = new Date(this.date);
   return date.toISOString();
 });
 
-PageSchema.virtual('dateFromNow').get(function() { 
+PageSchema.virtual('dateFromNow').get(function() {
     moment.lang('ru');
     var date = new Date(this.date);
     return moment(date).zone('+0400').fromNow();
 });
 
-PageSchema.virtual('dateLocal').get(function() { 
+PageSchema.virtual('dateLocal').get(function() {
     moment.lang('ru');
     var date = new Date(this.date);
     return moment(date).zone('+0400').format('LLL');
 });
 
-PageSchema.virtual('formattedContent').get(function() { 
+PageSchema.virtual('formattedContent').get(function() {
   var res = '', ar = this.content.split(/\r\n/);
   _.each(ar, function(val){
     res += '<p>' + val + '</p>\r\n';
@@ -75,11 +75,19 @@ PageSchema.virtual('formattedContent').get(function() {
 /**
  * Methods
  */
- 
+
 
 
 /**
  * Statics
  */
+
+PageSchema.statics.getMainPage = function(cb) {
+  this.findOne({url: 'main'}).exec(cb);
+};
+
+PageSchema.statics.getByUrl = function(url, cb) {
+  this.findOne({url: url, active: true}).exec(cb);
+};
 
 mongoose.model('Page', PageSchema)

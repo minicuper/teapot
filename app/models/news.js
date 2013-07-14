@@ -81,4 +81,25 @@ NewsSchema.virtual('formattedContent').get(function() {
  * Statics
  */
 
+NewsSchema.statics.getNews = function (monthes, cb) {
+  var monthAgo;
+
+  var addMonthToDate = function(date, monthes) {
+    var result = new Date(date);
+    result.setMonth(date.getMonth() + monthes);
+    return result;
+  };
+
+  monthAgo = addMonthToDate(new Date(), -monthes);
+
+  this.find({active: true, date: {$gte: monthAgo}}).sort('-date').limit(5).exec(cb);
+
+}
+
+NewsSchema.statics.getAllNews = function (cb) {
+  this.find().sort('-date').exec(cb);
+};
+
+
+
 mongoose.model('News', NewsSchema)

@@ -134,11 +134,11 @@ var makeTable = function(days, count,  cb){
 
 exports.index = function(req, res){
   var data, table;
-  var today, yesterday;
+  // var today, yesterday;
 
-  today = new Date();
-  yesterday = new Date();
-  yesterday.setDate(today.getDate()-1);
+  // today = new Date();
+  // yesterday = new Date();
+  // yesterday.setDate(today.getDate()-1);
 
 
   res.locals.title = "Teapots - Админка"
@@ -152,7 +152,7 @@ exports.index = function(req, res){
 
   async.parallel([
     function(callback){
-      Order.find({date: {$gt: yesterday}}).sort("-date").exec(function (err, docs) {
+      Order.getLastDaysOrders(1, function (err, docs) {
 
           //console.log('order - was here');
 
@@ -172,14 +172,16 @@ exports.index = function(req, res){
       });
     },
     function(callback){
-      var ids = [], prod;
+      // var ids = [], prod;
+      var prod;
+
       makeTable(3, 15, function(err, r){
         //console.log(r);
-        _.each(r, function(doc){
-          ids.push(mongoose.Types.ObjectId(doc.id));
-        });
+        // _.each(r, function(doc){
+        //   ids.push(mongoose.Types.ObjectId(doc.id));
+        // });
 
-        Product.find({_id:{$in: ids}}).exec(function(err, docs){
+        Product.findByObjIds(r, function(err, docs){
           if (err) {
             res.locals.table = '[]';
             return callback(new Error('Не найдены товары из корзины!'));

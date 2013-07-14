@@ -326,7 +326,9 @@ exports.postReturn = function (req, res, next){
   //console.log('paysto/return');
   //console.log('session: ', req.sessionID);
 
-var obj = req.body, correctMD5, ip, condition;
+var obj = req.body, correctMD5, ip
+  // , condition
+  ;
 
   //console.log(obj);
 
@@ -334,19 +336,21 @@ var obj = req.body, correctMD5, ip, condition;
 
   correctMD5 = checkMD5(obj, config.paysto.secret, true);
 
-  if (obj.PAYSTO_INVOICE_ID) {
-    condition = {"_id": obj.PAYSTO_INVOICE_ID}
-  } else {
-    condition = {"buyer.session_id": req.sessionID}
-  }
+  // if (obj.PAYSTO_INVOICE_ID) {
+  //   condition = {"_id": obj.PAYSTO_INVOICE_ID}
+  // } else {
+  //   condition = {"buyer.session_id": req.sessionID}
+  // }
 
   //console.log('condition: ', condition);
 
-  Order.find(condition).sort("-data").limit(1).exec(function(err, docs){
+  Order.findByIdOrBySessionId(obj.PAYSTO_INVOICE_ID, req.sessionID, function(err, docs){
     var status, doc;
+
     if (!docs || docs.length === 0 || err) {
-      return next(new Error('Что-то не то'));
+      return next(new Error('Что-то не то при возврате из PaySto!'));
     }
+
     doc = docs[0];
 
     //console.log(doc);

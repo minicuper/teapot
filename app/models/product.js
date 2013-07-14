@@ -213,12 +213,49 @@ ProductSchema.path('main_image').validate(function (main_image) {
  * Statics
  */
 
-ProductSchema.statics.load = function (id, cb) {
-  this.findOne({ _id : id })
-    .populate('category')
-      //.populate('comments.user')
-    .exec(cb)
+ProductSchema.statics.getAvailableProducts = function (cat_id, cb) {
+  this.find({"category": cat_id, active: true, count:{$ne: 0}}).sort({priority: -1, date: -1}).exec(cb);
 };
+
+ProductSchema.statics.findFullText = function(query, cb) {
+
+  var options = {
+    filter: { active: true, count: {$ne: 0} },
+    language: 'russian',
+    limit: 10
+  };
+
+  this.textSearch(query, options, function(err, output){
+    var results = [];
+
+    if (err) {
+      return cb(err, []);
+    }
+
+    //req.flash('query', query);
+
+    _.each(output.results, function(obj){
+      results.push(obj.obj);
+    });
+
+    cb(err, results);
+  });
+};
+
+ProductSchema.statics.findByObjIds = function(objs, cb) {
+  var ids = [];
+
+  _.each(objs, function(obj){
+    ids.push(mongoose.Types.ObjectId(obj.id));
+  });
+
+  this.find({_id:{$in: ids}}).exec(cb);
+};
+
+ProductSchema.statics.getSortedProductsWithFilter = function(filter, cb){
+  this.find(filter).sort({category: 1, priority: -1, date: -1}).populate('category').exec(cb);
+};
+
 
 
 

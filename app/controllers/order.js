@@ -89,13 +89,14 @@ var make_order = function(req, res, cb){
     , total = res.locals.setting.deliveryPrice
     , body = req.body
     , cart = req.session.cart_items
-    , ids = []
+    // , ids = []
   ;
-  _.each(cart, function(doc){
-    ids.push(mongoose.Types.ObjectId(doc.id));
-  });
+  // _.each(cart, function(doc){
+  //   ids.push(mongoose.Types.ObjectId(doc.id));
+  // });
 
-  Product.find({_id:{$in: ids}}).exec(function(err, docs){
+  // Product.find({_id:{$in: ids}}).exec(function(err, docs){
+  Product.findByObjIds(cart, function(err, docs){
     if (err) {
       return cb(new Error('Не найдены товары из корзины!'));
     }
@@ -311,17 +312,18 @@ var checkCart = function (req, res, cart, docs){
 exports.makeOrder = function(req, res, next){
   //TODO
   //Проверить складские запасы перед формированием заказа
-  var ids = []
-  , cart = _.extend([], req.session.cart_items);
+  var
+  // ids = [],
+  cart = _.extend([], req.session.cart_items);
 
   //, cart = req.session.cart_items;
   ;
 
   //console.log(cart);
 
-  _.each(cart, function(doc){ids.push(mongoose.Types.ObjectId(doc.id));});
+  // _.each(cart, function(doc){ids.push(mongoose.Types.ObjectId(doc.id));});
 
-  Product.find({_id:{$in: ids}}).exec(function(err, docs){
+  Product.findByObjIds(cart, function(err, docs){
     if (err) {
       return next(new Error('Не найдены товары из корзины!'));
     }
