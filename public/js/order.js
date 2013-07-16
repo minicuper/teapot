@@ -85,6 +85,8 @@
           $('[name="PAYSTO_DESC"]').val(inp.PAYSTO_DESC);
           $('[name="PayerEMail"]').val(inp.PayerEMail);
 
+          console.log('paysto submit');
+
           $('#paysto').submit();
         }
         console.log('Make post');

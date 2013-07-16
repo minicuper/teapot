@@ -28,7 +28,7 @@
     , "forever": "latest"
     , "hogan.js": "latest"
     , "moment": "latest"
-    , "mongoose-id-autoinc": "latest"
+    , "mongoose-id-autoinc": "2013.4.27-3"
     , "request": "latest"
   }
   , "devDependencies": {

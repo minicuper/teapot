@@ -419,6 +419,8 @@ exports.postOrder = function(req, res, next){
   if (req.body.payment === 'gate') {
     make_order(req, res, function(err, order){
 
+      console.log('order 1: ', order);
+
       if (err) {
 
         //TODO проверить после валидации (кинуть ошибки в флеш)
@@ -439,6 +441,8 @@ exports.postOrder = function(req, res, next){
 
       change_stock(req.session.cart_items);
       clear_cart(req, res);
+
+      console.log('order 2: ', order);
 
       res.locals.paysto = {
         PAYSTO_SHOP_ID: config.paysto.shopId,
