@@ -31,6 +31,10 @@ exports.show = function(req, res, next){
       }
       ];
 
+    res.locals.scripts = [
+      'lib/share42.js',
+    ];
+
     Product.findById(req.params.id, function (err, doc){
 
       if (err) {
