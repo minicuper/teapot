@@ -101,7 +101,9 @@ var makeTable = function(days, count,  cb){
               id: obj.url.substr(obj.url.lastIndexOf('/')+1)
             }
 
-            data.push(o);
+            if(o.id.length === 24) {
+              data.push(o);
+            }
 
             //console.log(o);
           }
@@ -176,10 +178,14 @@ exports.index = function(req, res){
       var prod;
 
       makeTable(3, 15, function(err, r){
-        //console.log(r);
+        //console.log('r:', r);
         // _.each(r, function(doc){
         //   ids.push(mongoose.Types.ObjectId(doc.id));
         // });
+
+        // if (r.length === 0) {
+        //   return callback(null);
+        // }
 
         Product.findByObjIds(r, function(err, docs){
           if (err) {
