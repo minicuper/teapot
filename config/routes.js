@@ -6,6 +6,10 @@ var async = require('async')
 module.exports = function (app, passport, auth) {
 
 
+  // Sitemap route
+  
+  var sitemap = require('../app/controllers/sitemap');
+  app.get('/sitemap.xml', sitemap.get);
   // login routes
 
   var login    = require('../app/controllers/login');
