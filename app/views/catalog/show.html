@@ -1,11 +1,11 @@
 {{#product}}
-<div  id="it-{{id}}">
+<div  id="it-{{id}}" itemscope itemtype="http://data-vocabulary.org/Product">
 	<h2>
-		{{name}}
+		<span itemprop="name">{{name}}</span>
     {{#disabled}} <span class="label label-important">Не продается!</span>{{/disabled}}
     {{#isNew}} <span class="label label-warning" title="Товар в магазине меньше одной недели">Новинка!</span>{{/isNew}}
 	</h2>
-	<img id="im-{{id}}" src="{{main_image_normal}}" alt="{{name}}">
+	<img id="im-{{id}}" src="{{main_image_normal}}" alt="{{name}}" itemprop="image">
 
   <div class="share42init" data-path="/img/" data-image="{{main_image_normal}}" data-description="Отличная чайная штука с сайта http://teapots.su"></div>
 
@@ -19,17 +19,19 @@
 			<a class="pull-left" href="/about/">
               <img class="media-object  img-polaroid" data-src="holder.js/64x64" alt="Заяц Анастасия" style="width: auto; height: auto;" src="/img/avatar.jpg">
           </a>
-			<div class="media-body">
+			<div class="media-body" itemprop="description">
         {{{description}}}
 			</div>
 		</div>
 		<p>
 		</p>
-		<div>
-			<span>Цена: <b>{{price}}</b> руб.<span>
-      <a class="btn btn-success into-cart" data-id="{{id}}" {{#disabled}}disabled{{/disabled}}>В корзину</a>
-    </span>
+		<div itemprop="offerDetails" itemscope itemtype="http://data-vocabulary.org/Offer">
+			<span>Цена: <b itemprop="price">{{price}}</b> руб.
+        <span>
+          <a class="btn btn-success into-cart" data-id="{{id}}" {{#disabled}}disabled{{/disabled}}>В корзину</a>
+        </span>
 			</span>
+      <meta itemprop="currency" content="RUB" />
 		</div>
     {{^product_img_empty}}
 		<!--<h5>-->
