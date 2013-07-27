@@ -32,7 +32,13 @@
         </span>
 			</span>
       <meta itemprop="currency" content="RUB" />
-		</div>
+      {{#disabled}}<meta itemprop="availability" content="out_of_stock">{{/disabled}}
+      {{^disabled}}<meta itemprop="availability" content="in_stock">{{/disabled}}
+    </div>
+
+    <span itemprop="review" itemscope itemtype="http://data-vocabulary.org/Review-aggregate">
+      <meta itemprop="rating" content="5">
+    </span>
     {{^product_img_empty}}
 		<!--<h5>-->
 		<!--	Еще фото:-->
