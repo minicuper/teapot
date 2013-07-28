@@ -31,6 +31,8 @@
     , "mongoose-id-autoinc": "2013.4.27-3"
     , "request": "latest"
     , "sitemap": "latest"
+    , "mongodb-short-id": "latest"
+    , "js2yml": "latest"
   }
   , "devDependencies": {
       "nodemon": "latest"

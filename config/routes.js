@@ -7,9 +7,14 @@ module.exports = function (app, passport, auth) {
 
 
   // Sitemap route
-  
+
   var sitemap = require('../app/controllers/sitemap');
   app.get('/sitemap.xml', sitemap.get);
+
+  // Yandex market map
+
+  var yandex = require('../app/controllers/yandex');
+  app.get('/yandex.xml', yandex.get);
   // login routes
 
   var login    = require('../app/controllers/login');

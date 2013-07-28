@@ -8,6 +8,9 @@ var _ = require("underscore")
 ;
 
 exports.get = function(req, res, next){
+
+  req.session.destroy();
+
   var sitemap, urlList = [];
 
   //Static part
