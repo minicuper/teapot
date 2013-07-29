@@ -54,11 +54,11 @@ exports.get = function(req, res, next){
             id: shortID.longToShort(doc._id.toString()),
             available: doc.active && (doc.count !== 0),
             bid: 21,
-            url: encodeURIComponent('http://teapots.su/catalog/' + doc._id),
+            url: ('http://teapots.su/catalog/' + doc._id),
             price: doc.price,
             currencyId: "RUB",
             categoryId: doc.category.order,
-            picture: encodeURIComponent(doc.main_image_normal),
+            picture: (doc.main_image_normal),
             name: doc.name
           });
         });
