@@ -26,7 +26,7 @@ exports.get = function(req, res, next){
 
   async.parallel([
     function(callback){
-      Category.find({active: true}).exec(function(err, docs){
+      Category.find().exec(function(err, docs){
         if (err) {
           return callback(err);
         }
@@ -54,11 +54,11 @@ exports.get = function(req, res, next){
             id: shortID.longToShort(doc._id.toString()),
             available: doc.active && (doc.count !== 0),
             bid: 21,
+            url: encodeURIComponent('http://teapots.su/catalog/' + doc._id),
             price: doc.price,
-            url: 'http://teapots.su/catalog/' + doc._id,
             currencyId: "RUB",
             categoryId: doc.category.order,
-            picture: doc.main_image_normal,
+            picture: encodeURIComponent(doc.main_image_normal),
             name: doc.name
           });
         });
