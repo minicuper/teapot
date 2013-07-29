@@ -6,6 +6,7 @@ var _ = require("underscore")
   , Category = mongoose.model('Category')
   // , shortID = require('mongodb-short-id')
   , base32 = require('base32')
+  , htmlToText = require('html-to-text')
 ;
 
 function l2s(longID) {
@@ -56,7 +57,9 @@ exports.get = function(req, res, next){
         }
 
         _.each(docs, function(doc){
-          //console.log(typeof doc._id, doc._id);
+          // console.log("----------------------");
+          // console.log(htmlToText.fromString(doc.description, {wordwrap: 130}));
+
           obj.offers.push({
             id: l2s(doc._id.toString()),
             available: doc.active && (doc.count !== 0),
@@ -66,7 +69,8 @@ exports.get = function(req, res, next){
             currencyId: "RUB",
             categoryId: doc.category.order,
             picture: (doc.main_image_normal),
-            name: doc.name
+            name: doc.name,
+            description: htmlToText.fromString(doc.description, {wordwrap: 130})
           });
         });
 

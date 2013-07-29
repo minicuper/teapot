@@ -34,6 +34,7 @@
     , "mongodb-short-id": "latest"
     , "js2yml": "latest"
     , "base32": "latest"
+    , "html-to-text": "latest"
   }
   , "devDependencies": {
       "nodemon": "latest"
