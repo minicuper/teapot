@@ -2,9 +2,11 @@ User-agent: Yandex
 Allow: /
 Disallow: /admin
 Disallow: /paysto
+Disallow: /urlitso
 
 User-agent: *
 Allow: /
 Disallow: /admin
 Disallow: /paysto
+Disallow: /urlitso
 Host: teapots.su
