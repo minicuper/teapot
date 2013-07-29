@@ -27,7 +27,7 @@ exports.get = function(req, res, next){
         }
 
         _.each(docs, function(doc){
-          urlList.push({url: '/catalog/' + doc.url + '/'});
+          urlList.push({url: '/catalog/' + doc.url + '/', changefreq: 'daily'});
         });
 
         callback(null);
@@ -41,7 +41,7 @@ exports.get = function(req, res, next){
         }
 
         _.each(docs, function(doc){
-          urlList.push({url: '/catalog/' + doc.id});
+          urlList.push({url: '/catalog/' + doc.id, changefreq: 'daily'});
         });
 
         callback(null);
