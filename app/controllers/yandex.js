@@ -4,8 +4,15 @@ var _ = require("underscore")
   , mongoose = require('mongoose')
   , Product = mongoose.model('Product')
   , Category = mongoose.model('Category')
-  , shortID = require('mongodb-short-id')
+  // , shortID = require('mongodb-short-id')
+  , base32 = require('base32')
 ;
+
+function l2s(longID) {
+  var buffer = new Buffer(longID, 'hex');
+  return base32.encode(buffer);
+  //return buffer.toString(32).replace('+', '-').replace('/', '_');
+}
 
 exports.get = function(req, res, next){
 
@@ -51,7 +58,7 @@ exports.get = function(req, res, next){
         _.each(docs, function(doc){
           //console.log(typeof doc._id, doc._id);
           obj.offers.push({
-            id: shortID.longToShort(doc._id.toString()),
+            id: l2s(doc._id.toString()),
             available: doc.active && (doc.count !== 0),
             bid: 21,
             url: ('http://teapots.su/catalog/' + doc._id),

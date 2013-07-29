@@ -33,6 +33,7 @@
     , "sitemap": "latest"
     , "mongodb-short-id": "latest"
     , "js2yml": "latest"
+    , "base32": "latest"
   }
   , "devDependencies": {
       "nodemon": "latest"
