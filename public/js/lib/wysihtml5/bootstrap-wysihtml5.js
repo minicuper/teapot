@@ -320,8 +320,8 @@
                 var newWindow = targetInput.prop("checked");
                 self.editor.composer.commands.exec("createLink", {
                     'href' : url,
-                    'target' : (newWindow ? '_blank' : '_self'),
-                    'rel' : (newWindow ? 'nofollow' : '')
+                    'target' : (newWindow ? '_blank' : '_self')
+                    , 'rel' : (newWindow ? 'nofollow' : '')
                 });
             };
             var pressedEnter = false;
