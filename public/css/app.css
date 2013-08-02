@@ -271,9 +271,9 @@ th.input-inside {
   margin-right: -1px;
 }
 
-.nav a, .nav a:hover {
-  color: black;
-}
+/*.nav a, .nav a:hover {*/
+/*  color: black;*/
+/*}*/
 
 
 #share42 {display: inline-block; padding: 6px 0 0 6px; background: #FFF; border: 1px solid #E9E9E9; border-radius: 4px;}
@@ -288,4 +288,44 @@ th.input-inside {
 
 .share42init{
   padding: 10px 0;
+}
+
+/* Base class */
+.bs-catalog {
+  position: relative;
+  padding: 45px 0px 0px;
+  margin-top: -10px;
+}
+
+/* Echo out a label for the example */
+.bs-catalog:after {
+  content: "Каталог";
+  position: absolute;
+  top:  15px;
+  left: 0px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #bbb;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Base class */
+.bs-cart {
+  position: relative;
+  padding: 45px 0px 0px;
+  margin-top: -10px;
+}
+
+/* Echo out a label for the example */
+.bs-cart:after {
+  content: "Корзина";
+  position: absolute;
+  top:  15px;
+  left: 0px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #bbb;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
