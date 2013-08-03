@@ -12,8 +12,10 @@ var express = require('express')
   , errors = require('./middlewares/errors')
   , cart = require('./middlewares/cart')
   , settings = require('./middlewares/settings')
+  , force = require('express-force-domain')
+  , env = process.env.NODE_ENV || 'development'
   // , nav = require('./navbar');
-  ;
+;
   //art
 
 module.exports = function (app, config, passport) {
@@ -93,6 +95,8 @@ module.exports = function (app, config, passport) {
 
     // use settings from db
 
+    // console.log("new version!");
+
     app.use(settings.setLocals);
     app.use(cart.getCart);
 
@@ -100,9 +104,15 @@ module.exports = function (app, config, passport) {
       // console.log('originalUrl', req.originalUrl);
       // console.log('url', req.url);
       // console.log('host', req.host);
+      // console.log('headers', req.headers);
       //console.log('session: ', req.sessionID);
       next();
     });
+
+    //Redirect to teapots.su
+    if (env === 'production'){
+      app.use(force(config.app.url));
+    }
 
     // routes should be at the last
     app.use(app.router);
