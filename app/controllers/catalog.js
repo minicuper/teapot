@@ -41,9 +41,9 @@ exports.show = function(req, res, next){
         //console.log('error in individual product');
         return next(new Error('Page not found!'));
       }
-      if (doc.active === false || doc.count === 0){
-        doc.disabled = true;
-      }
+      // if (doc.active === false || doc.count === 0){
+      //   doc.disabled = true;
+      // }
 
       res.locals.title = "Teapots - " + doc.name;
       res.locals.description  = doc.meta.description;
@@ -113,6 +113,11 @@ exports.index_cat = function(req, res, next){
     }
     ];
 
+  res.locals.scripts = [
+    'lib/jquery.scrollTo.min.js',
+    'scroll.js'
+  ];
+
   async.series([
     function(callback) {
       Category.findByUrl(url, function(err, doc){
@@ -137,6 +142,7 @@ exports.index_cat = function(req, res, next){
         //console.log('product - was here');
         if (err) return callback(err);
         res.locals.products = docs;
+        res.locals.enable_upbutton = (docs.length > 1);
         callback();
       });
     }

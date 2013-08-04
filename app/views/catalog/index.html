@@ -10,6 +10,7 @@
 <div id="it-{{id}}">
   <h3>
 		{{name}}
+    {{#disabled}} <span class="label label-important">Не продается!</span>{{/disabled}}
     {{#isNew}} <span class="label label-warning" title="Товар в магазине меньше одной недели">Новинка!</span>{{/isNew}}
 	</h3>
 
@@ -20,12 +21,16 @@
 		<span>Цена: <b>{{price}}</b> руб.
       <span>
         <a class="btn" href="/catalog/{{_id}}">Подробнее »</a>
-        <a class="btn btn-success into-cart" data-id="{{id}}">В корзину</a>
+        <a class="btn btn-success into-cart" data-id="{{id}}" {{#disabled}}disabled{{/disabled}}>В корзину</a>
       </span>
 		</span>
 	</div>
 </div>
 <hr>
 {{/products}}
+
+{{#enable_upbutton}}
+<a href="#" class="upscroll-btn btn btn-info btn-block">Наверх</a>
+{{/enable_upbutton}}
 
 <!--<h3>Products</h3>-->

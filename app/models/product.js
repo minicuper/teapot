@@ -190,6 +190,9 @@ ProductSchema.virtual('dateLocal').get(function() {
     return moment(date).zone('+0400').format('LLL');
 });
 
+ProductSchema.virtual('disabled').get(function() {
+    return this.active === false || this.count === 0;
+});
 
 
 /**
@@ -216,6 +219,11 @@ ProductSchema.path('main_image').validate(function (main_image) {
 ProductSchema.statics.getAvailableProducts = function (cat_id, cb) {
   this.find({"category": cat_id, active: true, count:{$ne: 0}}).sort({priority: -1, date: -1}).exec(cb);
 };
+
+ProductSchema.statics.getUnavailableProducts = function (cb) {
+  this.find({active: true, count: 0}).sort({priority: -1, date: -1}).exec(cb);
+};
+
 
 ProductSchema.statics.findFullText = function(query, cb) {
 

@@ -62,6 +62,11 @@ module.exports = function (app, passport, auth) {
   app.del ('/cart/:id',   cart.delete);
   //app.post('/cart/:id',   cart.create);
 
+  var archive = require('../app/controllers/archive');
+
+  app.get ('/archive/',       archive.index);
+
+
   var paysto = require('../app/controllers/paysto');
 
   app.post('/paysto/check',   paysto.postCheck);
