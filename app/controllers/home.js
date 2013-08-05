@@ -20,8 +20,8 @@ exports.index = function(req, res){
   var monthAgo;
 
   res.locals.title = "Teapots - магазин чайников и чайных штук"
-  res.locals.description = "Интернет-магазин чайников и чайной утвари. Китайские чайники из иссинской глины, тайваньские чашки, фигурки для чайной церемонии, чайные доски.";
-  res.locals.keywords = "чайники, чайная утварь, фигурки, чашки, чайная церемония";
+  //res.locals.description = "Интернет-магазин чайников и чайной утвари. Китайские чайники из иссинской глины, тайваньские чашки, фигурки для чайной церемонии, чайные доски.";
+  //res.locals.keywords = "чайники, чайная утварь, фигурки, чашки, чайная церемония";
 
   if (req.session.logged) {
     //console.log('Welcome back!');
@@ -59,7 +59,10 @@ exports.index = function(req, res){
         //console.log('main page: ',docs);
         //if (docs !== null && docs.length > 0) {
         //console.log('error in main page: ', err);
-          res.locals.maintopic = docs;
+        res.locals.keywords     = docs.meta.keywords;
+        res.locals.description  = docs.meta.description;
+        res.locals.maintopic = docs;
+          
         //}
         cb(err);
       });

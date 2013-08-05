@@ -352,6 +352,9 @@ exports.makeOrder = function(req, res, next){
       res.locals.delivery = del_arr[del_arr.length - 1];
     }
 
+    res.locals.title = "Teapots - Оформление заказа";
+    res.locals.description = "Страница оформления заказа в интернет-магазине чайников и чайных штук TeaPots. Редактирование корзины, ввод данных, выбор ситсемы оплаты";
+
     //console.log(req.sessionID);
 
     //req.flash('info', 'Flash is back!')

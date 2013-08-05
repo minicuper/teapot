@@ -29,7 +29,11 @@ var PageSchema = new Schema({
   url: {type : String, default : '', trim : true, index: true},
   active: Boolean,
   content: String,
-  date  : {type : Date, default : Date.now}
+  date  : {type : Date, default : Date.now},
+  meta: {
+    description: {type : String, default : '', trim : true},
+    keywords: {type : String, default : '', trim : true}
+  }
 })
 
 

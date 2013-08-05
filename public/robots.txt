@@ -3,10 +3,13 @@ Allow: /
 Disallow: /admin
 Disallow: /paysto
 Disallow: /urlitso
+Disallow: /order
 
 User-agent: *
 Allow: /
 Disallow: /admin
 Disallow: /paysto
 Disallow: /urlitso
+Disallow: /order
+
 Host: teapots.su
