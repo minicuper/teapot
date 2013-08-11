@@ -170,7 +170,8 @@ var change_stock = function(cart){
   var change_stock_by_id = function(id, count){
 
     Product.findById(id, function (err, doc){
-      //console.log(doc, count);
+      console.log(doc, count);
+
       if (err) return err;
 
       doc.count = doc.count - count;
