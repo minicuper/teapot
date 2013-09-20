@@ -14,7 +14,24 @@
     {{#isNew}} <span class="label label-warning" title="Товар в магазине меньше одной недели">Новинка!</span>{{/isNew}}
 	</h3>
 
-	<a href="/catalog/{{_id}}"><img id="im-{{id}}" src="{{main_image_normal}}" alt="{{name}}"></a>
+	<a href="/catalog/{{_id}}">
+	  <img id="im-{{id}}" src="{{main_image_normal}}" alt="Фото: {{name}}">
+
+	 <!-- <span data-picture data-alt="Фото: {{name}}" class="img">-->
+		<!--	<span data-src="{{main_image_423}}"></span>-->
+		<!--	<span data-src="{{main_image_710}}" data-media="(min-width: 480px)"></span>-->
+		<!--	<span data-src="{{main_image_538}}" data-media="(min-width: 768px)"></span>-->
+		<!--	<span data-src="{{main_image_700}}" data-media="(min-width: 980px)"></span>-->
+		<!--	<span data-src="{{main_image_normal}}" data-media="(min-width: 1200px)">-->
+		<!--	  <img alt="A" src="{{main_image_normal}}">-->
+		<!--	</span>-->
+
+		<!--	<noscript>-->
+		<!--		<img src="{{main_image_normal}}" alt="Фото: {{name}}">-->
+		<!--	</noscript>-->
+		<!--</span>-->
+
+	</a>
 	<br>
 	<br>
 	<div>

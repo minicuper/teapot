@@ -8,7 +8,7 @@ var env = process.env.NODE_ENV || 'development'
   , mongoose = require('mongoose')
   //, Imager = require('imager')
   , async = require('async')
-  , Product = mongoose.model('Product')
+  //, Product = mongoose.model('Product')
   , _ = require('underscore')
   , nav = require('../../config/navbar')
   , nodemailer = require('nodemailer')
@@ -40,14 +40,14 @@ var processTemplate = function (tplPath, locals) {
 
 
 // Шлем почту покупателю
-var sendmail_to_buyer = function(order, subject, template){
+var sendmail_to_buyer = function(data, subject, template){
 
   var message = {
       from: config.mail.name + ' <' + config.mail.login+ '>',
-      to: order.buyer.name + ' <' + order.buyer.email+'>',
+      to: data.buyer.name + ' <' + data.buyer.email+'>',
       subject: subject,
 
-      html: processTemplate(template, order)
+      html: processTemplate(template, data)
 
   };
 
@@ -62,14 +62,14 @@ var sendmail_to_buyer = function(order, subject, template){
 };
 
 // Шлем почту покупателю
-var sendmail_to_seller = function(order, subject, template){
+var sendmail_to_seller = function(data, subject, template){
 
   var message = {
       from: config.mail.name + ' <' + config.mail.login+ '>',
       to:   config.mail.name + ' <' + config.mail.login+ '>',
       subject: subject,
 
-      html: processTemplate(template, order)
+      html: processTemplate(template, data)
 
   };
 
@@ -440,13 +440,13 @@ exports.postOrder = function(req, res, next){
 
       }
 
-      sendmail_to_buyer(order, 'Ваш заказ успешно сформирован!', 'gate_order_complite_buyer');
-      sendmail_to_seller(order, 'Новый заказ в интернет-магазине "TeaPots"', 'gate_order_complite_seller');
+      sendmail_to_buyer(_.extend({}, order, app.config), 'Ваш заказ успешно сформирован!', 'gate_order_complite_buyer');
+      sendmail_to_seller(_.extend({}, order, app.config), 'Новый заказ в интернет-магазине "TeaPots"', 'gate_order_complite_seller');
 
       change_stock(req.session.cart_items);
       clear_cart(req, res);
 
-      console.log('order 2: ', order);
+      //console.log('order 2: ', order);
 
       res.locals.paysto = {
         PAYSTO_SHOP_ID: config.paysto.shopId,
@@ -495,8 +495,8 @@ exports.postOrder = function(req, res, next){
 
       }
 
-      sendmail_to_buyer(order, 'Ваш заказ успешно сформирован!', 'sb_order_complite_buyer');
-      sendmail_to_seller(order, 'Новый заказ в интернет-магазине "TeaPots"', 'sb_order_complite_seller');
+      sendmail_to_buyer(_.extend({}, order, app.config), 'Ваш заказ успешно сформирован!', 'sb_order_complite_buyer');
+      sendmail_to_seller(_.extend({}, order, app.config), 'Новый заказ в интернет-магазине "TeaPots"', 'sb_order_complite_seller');
 
       change_stock(req.session.cart_items);
       clear_cart(req, res);
@@ -509,13 +509,18 @@ exports.postOrder = function(req, res, next){
           href: "/"
         }];
 
+        res.locals.sberbank = app.config.sberbank;
+
         res.locals.bc_active = "Заказ успешно создан";
         res.locals.getting_order = true;
 
         res.render('order/complete');
       }
       else {
+        res.locals.sberbank = app.config.sberbank;
+
         res.render('order/complete', {layout: ""}, function(err, html){
+
           res.send({
             action: "redraw",
             content: html

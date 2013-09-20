@@ -4,3 +4,4 @@ data/
 mongod
 ex/
 heroku-client/
+config/config.js

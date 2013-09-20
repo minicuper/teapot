@@ -141,6 +141,18 @@ ProductSchema.virtual('main_image_large').get(function() {
   return url;
 });
 
+_.each([870, 700, 538, 710, 423], function(num){
+  
+  ProductSchema.virtual('main_image_' + num).get(function() {
+    if (this.main_image.indexOf('googleusercontent') === -1) return this.main_image;
+
+    return this.main_image.replace(/\/s\d+\//, '/s' + num + '/');;
+  });
+  
+});
+
+
+
 ProductSchema.virtual('activeYN').get(function() {
   if (this.active === true) {
     return 'Да';

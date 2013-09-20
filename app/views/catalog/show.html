@@ -5,7 +5,7 @@
     {{#disabled}} <span class="label label-important">Не продается!</span>{{/disabled}}
     {{#isNew}} <span class="label label-warning" title="Товар в магазине меньше одной недели">Новинка!</span>{{/isNew}}
 	</h2>
-	<img id="im-{{id}}" src="{{main_image_normal}}" alt="{{name}}" itemprop="image">
+	<img id="im-{{id}}" src="{{main_image_normal}}" alt="Фото: {{name}}" title="Фото: {{name}}" itemprop="image">
 
   <div class="share42init" data-path="/img/" data-image="{{main_image_normal}}" data-description="Отличная чайная штука с сайта http://teapots.su"></div>
 
@@ -17,7 +17,7 @@
 
 		<div class="media">
 			<a class="pull-left" href="/about/" rel="author">
-              <img class="media-object  img-polaroid" style="width: auto; height: auto;" src="https://lh4.googleusercontent.com/-vQwKop2iKuw/UffkQ2-lqRI/AAAAAAAACQI/NOv-q2OEkug/s800/179793_503370669741311_603455872_n%2520%252864x64%2529.jpg">
+          <img alt="Обо мне" class="media-object  img-polaroid" style="width: auto; height: auto;" src="https://lh4.googleusercontent.com/-vQwKop2iKuw/UffkQ2-lqRI/AAAAAAAACQI/NOv-q2OEkug/s800/179793_503370669741311_603455872_n%2520%252864x64%2529.jpg">
       </a>
 			<div class="media-body" itemprop="description">
         {{{description}}}
@@ -48,7 +48,7 @@
 
     {{/product_img_empty}}
     {{#images}}
-		<img src="{{url_normal}}" alt="{{name}} (дополнительно)">
+		<img src="{{url_normal}}" alt="Фото: {{name}}" title="Фото: {{name}}">
     <br/><br/>
 		{{/images}}
     {{^product_ref_empty}}

@@ -27,6 +27,10 @@ var env = process.env.NODE_ENV || 'development'
   , mongoose = require('mongoose')
 ;
 
+global.app = {
+  config: config
+}
+
 // Bootstrap db connection
 mongoose.connect(config.db);
 
